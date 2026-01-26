@@ -1,0 +1,27 @@
+# Web Framework
+django
+djangorestframework
+django-cors-headers
+djangorestframework-simplejwt
+
+# Database & GIS
+psycopg2-binary
+dj-database-url
+
+# Machine Learning
+xgboost
+scikit-learn
+pandas
+numpy
+joblib
+
+# IA & RAG
+langchain
+langchain-community
+langchain-openai
+chromadb
+pypdf
+
+# Task Queue
+celery
+redis

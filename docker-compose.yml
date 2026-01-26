@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgis/postgis:15-3.3
+    environment:
+      POSTGRES_DB: resilience_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+  
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: resilience_chroma
+    volumes:
+      - ./data/vector_db:/chroma/persist
+    ports:
+      - "8001:8000"
+    networks:
+      - resilience_network
+      
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/app
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgres://admin:password@db:5432/resilience_db
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  celery_worker:
+    build: ./backend
+    command: celery -A core worker --loglevel=info
+    depends_on:
+      - redis
+      - db
+
+volumes:
+  postgres_data:
