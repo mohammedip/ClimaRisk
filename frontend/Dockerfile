@@ -1,13 +1,12 @@
-FROM node:18-slim
+FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json .
 RUN npm install
 
 COPY . .
 
-RUN npm run build
-# On utilise un serveur simple pour le développement ou nginx pour la prod
-RUN npm install -g serve
-CMD ["serve", "-s", "build", "-l", "3000"]
+EXPOSE 5173
+
+CMD ["npm", "run", "dev"]

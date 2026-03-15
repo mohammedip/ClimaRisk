@@ -1,27 +1,39 @@
-# Web Framework
-django
-djangorestframework
-django-cors-headers
-djangorestframework-simplejwt
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
 
-# Database & GIS
-psycopg2-binary
-dj-database-url
+pydantic[email]>=2.7.4,<3.0.0
+pydantic-settings
+sqlalchemy==2.0.29
+asyncpg==0.29.0
+psycopg2-binary==2.9.9
+python-dotenv==1.0.1
+python-jose[cryptography]==3.3.0
+bcrypt==4.1.2
+python-multipart==0.0.9
 
-# Machine Learning
-xgboost
-scikit-learn
-pandas
-numpy
-joblib
+chromadb>=0.4.24
+sentence-transformers>=2.6.1
+pypdf>=4.2.0
+pymupdf4llm==0.0.17
 
-# IA & RAG
-langchain
-langchain-community
-langchain-openai
-chromadb
-pypdf
+transformers>=4.40.1
+torch>=2.2.2
+accelerate>=0.29.3
+huggingface_hub>=0.15.1
 
-# Task Queue
-celery
-redis
+langchain-ollama>=0.1.0
+langchain>=0.3.0,<0.4.0
+langchain-community>=0.3.0
+langchain-huggingface>=0.1.0
+langchain-core>=0.3.0,<0.4.0
+langchain-chroma
+
+httpx
+apscheduler==3.10.4
+
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+xgboost==2.0.3
+joblib==1.4.0
+imbalanced-learn==0.12.2
