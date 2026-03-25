@@ -1,0 +1,26 @@
+[2026-03-25T22:15:33.684+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-25T22:15:33.750+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: climarisk_predictions.predict_all_zones scheduled__2026-03-25T21:40:00+00:00 [queued]>
+[2026-03-25T22:15:33.763+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: climarisk_predictions.predict_all_zones scheduled__2026-03-25T21:40:00+00:00 [queued]>
+[2026-03-25T22:15:33.764+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2026-03-25T22:15:33.782+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): predict_all_zones> on 2026-03-25 21:40:00+00:00
+[2026-03-25T22:15:33.798+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', '***_predictions', 'predict_all_zones', 'scheduled__2026-03-25T21:40:00+00:00', '--job-id', '589', '--raw', '--subdir', 'DAGS_FOLDER/***_dag.py', '--cfg-path', '/tmp/tmpx9la41ko']
+[2026-03-25T22:15:33.800+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=267) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-03-25T22:15:33.802+0000] {standard_task_runner.py:91} INFO - Job 589: Subtask predict_all_zones
+[2026-03-25T22:15:33.803+0000] {standard_task_runner.py:63} INFO - Started process 268 to run task
+[2026-03-25T22:15:33.935+0000] {task_command.py:426} INFO - Running <TaskInstance: climarisk_predictions.predict_all_zones scheduled__2026-03-25T21:40:00+00:00 [running]> on host 6146f0e8983c
+[2026-03-25T22:15:34.138+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='***_predictions' AIRFLOW_CTX_TASK_ID='predict_all_zones' AIRFLOW_CTX_EXECUTION_DATE='2026-03-25T21:40:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-25T21:40:00+00:00'
+[2026-03-25T22:15:34.141+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-25T22:15:37.254+0000] {climarisk_dag.py:144} INFO - ✅ Alger: flood=LOW(0.15) fire=LOW(0.05)
+[2026-03-25T22:15:40.453+0000] {climarisk_dag.py:144} INFO - ✅ Cairo: flood=LOW(0.14) fire=LOW(0.18)
+[2026-03-25T22:15:43.041+0000] {climarisk_dag.py:144} INFO - ✅ Lagos: flood=MEDIUM(0.47) fire=LOW(0.05)
+[2026-03-25T22:15:45.098+0000] {climarisk_dag.py:144} INFO - ✅ Kano: flood=LOW(0.07) fire=MEDIUM(0.32)
+[2026-03-25T22:15:46.945+0000] {climarisk_dag.py:144} INFO - ✅ Abuja: flood=LOW(0.11) fire=LOW(0.06)
+[2026-03-25T22:15:48.360+0000] {climarisk_dag.py:144} INFO - ✅ Johannesburg: flood=LOW(0.05) fire=LOW(0.05)
+[2026-03-25T22:15:50.543+0000] {climarisk_dag.py:144} INFO - ✅ Cape Town: flood=LOW(0.15) fire=LOW(0.07)
+[2026-03-25T22:15:52.604+0000] {climarisk_dag.py:144} INFO - ✅ Nairobi: flood=LOW(0.10) fire=LOW(0.08)
+[2026-03-25T22:15:54.769+0000] {climarisk_dag.py:144} INFO - ✅ Addis Ababa: flood=LOW(0.10) fire=LOW(0.05)
+[2026-03-25T22:15:56.373+0000] {climarisk_dag.py:144} INFO - ✅ Dar es Salaam: flood=MEDIUM(0.37) fire=LOW(0.05)
+[2026-03-25T22:15:57.925+0000] {climarisk_dag.py:144} INFO - ✅ Accra: flood=LOW(0.15) fire=LOW(0.13)
+[2026-03-25T22:15:59.518+0000] {climarisk_dag.py:144} INFO - ✅ Casablanca: flood=LOW(0.15) fire=LOW(0.07)
+[2026-03-25T22:16:01.088+0000] {climarisk_dag.py:144} INFO - ✅ Mohammedia: flood=LOW(0.12) fire=LOW(0.07)
+[2026-03-25T22:16:02.647+0000] {climarisk_dag.py:144} INFO - ✅ El Jadida: flood=LOW(0.15) fire=LOW(0.07)

@@ -1,0 +1,40 @@
+[2026-03-23T20:55:28.357+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-23T20:55:28.388+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: climarisk_predictions.get_active_zones scheduled__2026-03-23T20:54:00+00:00 [queued]>
+[2026-03-23T20:55:28.395+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: climarisk_predictions.get_active_zones scheduled__2026-03-23T20:54:00+00:00 [queued]>
+[2026-03-23T20:55:28.396+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-03-23T20:55:28.406+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): get_active_zones> on 2026-03-23 20:54:00+00:00
+[2026-03-23T20:55:28.412+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=3588) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-03-23T20:55:28.412+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', '***_predictions', 'get_active_zones', 'scheduled__2026-03-23T20:54:00+00:00', '--job-id', '138', '--raw', '--subdir', 'DAGS_FOLDER/***_dag.py', '--cfg-path', '/tmp/tmp69a1iv_3']
+[2026-03-23T20:55:28.413+0000] {standard_task_runner.py:63} INFO - Started process 3594 to run task
+[2026-03-23T20:55:28.414+0000] {standard_task_runner.py:91} INFO - Job 138: Subtask get_active_zones
+[2026-03-23T20:55:28.476+0000] {task_command.py:426} INFO - Running <TaskInstance: climarisk_predictions.get_active_zones scheduled__2026-03-23T20:54:00+00:00 [running]> on host 6146f0e8983c
+[2026-03-23T20:55:28.565+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='***_predictions' AIRFLOW_CTX_TASK_ID='get_active_zones' AIRFLOW_CTX_EXECUTION_DATE='2026-03-23T20:54:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-23T20:54:00+00:00'
+[2026-03-23T20:55:28.565+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-23T20:55:28.602+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-23T20:55:28.602+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/climarisk_dag.py", line 43, in get_active_zones
+    from core.database import SessionLocal
+  File "/app/core/database.py", line 2, in <module>
+    from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+ImportError: cannot import name 'async_sessionmaker' from 'sqlalchemy.ext.asyncio' (/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/__init__.py)
+[2026-03-23T20:55:28.621+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=***_predictions, task_id=get_active_zones, run_id=scheduled__2026-03-23T20:54:00+00:00, execution_date=20260323T205400, start_date=20260323T205528, end_date=20260323T205528
+[2026-03-23T20:55:28.631+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 138 for task get_active_zones (cannot import name 'async_sessionmaker' from 'sqlalchemy.ext.asyncio' (/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/__init__.py); 3594)
+[2026-03-23T20:55:28.669+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-23T20:55:28.690+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-23T20:55:28.692+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

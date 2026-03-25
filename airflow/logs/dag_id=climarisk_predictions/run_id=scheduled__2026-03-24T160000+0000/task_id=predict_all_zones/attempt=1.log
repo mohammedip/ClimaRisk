@@ -1,0 +1,330 @@
+[2026-03-24T16:30:01.771+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-24T16:30:01.833+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: climarisk_predictions.predict_all_zones scheduled__2026-03-24T16:00:00+00:00 [queued]>
+[2026-03-24T16:30:01.848+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: climarisk_predictions.predict_all_zones scheduled__2026-03-24T16:00:00+00:00 [queued]>
+[2026-03-24T16:30:01.850+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-03-24T16:30:01.871+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): predict_all_zones> on 2026-03-24 16:00:00+00:00
+[2026-03-24T16:30:01.888+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=23447) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-03-24T16:30:01.885+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', '***_predictions', 'predict_all_zones', 'scheduled__2026-03-24T16:00:00+00:00', '--job-id', '441', '--raw', '--subdir', 'DAGS_FOLDER/***_dag.py', '--cfg-path', '/tmp/tmpkrfef_g8']
+[2026-03-24T16:30:01.890+0000] {standard_task_runner.py:63} INFO - Started process 23448 to run task
+[2026-03-24T16:30:01.890+0000] {standard_task_runner.py:91} INFO - Job 441: Subtask predict_all_zones
+[2026-03-24T16:30:02.001+0000] {task_command.py:426} INFO - Running <TaskInstance: climarisk_predictions.predict_all_zones scheduled__2026-03-24T16:00:00+00:00 [running]> on host 6146f0e8983c
+[2026-03-24T16:30:02.205+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='***_predictions' AIRFLOW_CTX_TASK_ID='predict_all_zones' AIRFLOW_CTX_EXECUTION_DATE='2026-03-24T16:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-24T16:00:00+00:00'
+[2026-03-24T16:30:02.209+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-24T16:30:06.817+0000] {climarisk_dag.py:145} INFO - ✅ Alger: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:09.011+0000] {climarisk_dag.py:145} INFO - ✅ Cairo: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:12.938+0000] {climarisk_dag.py:145} INFO - ✅ Lagos: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:15.194+0000] {climarisk_dag.py:145} INFO - ✅ Kano: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:16.626+0000] {climarisk_dag.py:145} INFO - ✅ Abuja: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:18.093+0000] {climarisk_dag.py:145} INFO - ✅ Johannesburg: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:19.357+0000] {climarisk_dag.py:145} INFO - ✅ Cape Town: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:20.415+0000] {climarisk_dag.py:145} INFO - ✅ Nairobi: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:21.431+0000] {climarisk_dag.py:145} INFO - ✅ Addis Ababa: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:22.571+0000] {climarisk_dag.py:145} INFO - ✅ Dar es Salaam: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:24.197+0000] {climarisk_dag.py:145} INFO - ✅ Accra: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:24.968+0000] {climarisk_dag.py:145} INFO - ✅ Casablanca: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:25.697+0000] {climarisk_dag.py:145} INFO - ✅ Mohammedia: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:26.313+0000] {climarisk_dag.py:145} INFO - ✅ El Jadida: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:26.904+0000] {climarisk_dag.py:145} INFO - ✅ Settat: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:27.482+0000] {climarisk_dag.py:145} INFO - ✅ Berrechid: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:28.048+0000] {climarisk_dag.py:145} INFO - ✅ Benslimane: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:28.557+0000] {climarisk_dag.py:145} INFO - ✅ Sidi Bennour: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:29.044+0000] {climarisk_dag.py:145} INFO - ✅ Azemmour: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:29.582+0000] {climarisk_dag.py:145} INFO - ✅ Mediouna: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:30.055+0000] {climarisk_dag.py:145} INFO - ✅ Nouaceur: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:30.491+0000] {climarisk_dag.py:145} INFO - ✅ Rabat: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:31.037+0000] {climarisk_dag.py:145} INFO - ✅ Salé: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:31.493+0000] {climarisk_dag.py:145} INFO - ✅ Kénitra: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:31.947+0000] {climarisk_dag.py:145} INFO - ✅ Témara: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:32.395+0000] {climarisk_dag.py:145} INFO - ✅ Skhirat: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:32.850+0000] {climarisk_dag.py:145} INFO - ✅ Tiflet: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:33.304+0000] {climarisk_dag.py:145} INFO - ✅ Khémisset: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:33.729+0000] {climarisk_dag.py:145} INFO - ✅ Sidi Slimane: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:34.279+0000] {climarisk_dag.py:145} INFO - ✅ Sidi Kacem: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:34.793+0000] {climarisk_dag.py:145} INFO - ✅ Souk el Arba: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:35.259+0000] {climarisk_dag.py:145} INFO - ✅ Ouazzane: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:35.745+0000] {climarisk_dag.py:145} INFO - ✅ Fès: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:36.242+0000] {climarisk_dag.py:145} INFO - ✅ Meknès: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:36.705+0000] {climarisk_dag.py:145} INFO - ✅ Ifrane: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:37.199+0000] {climarisk_dag.py:145} INFO - ✅ Azrou: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:37.756+0000] {climarisk_dag.py:145} INFO - ✅ Taounate: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:38.239+0000] {climarisk_dag.py:145} INFO - ✅ Taza: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:38.656+0000] {climarisk_dag.py:145} INFO - ✅ Sefrou: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:39.180+0000] {climarisk_dag.py:145} INFO - ✅ Boulemane: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:39.607+0000] {climarisk_dag.py:145} INFO - ✅ El Hajeb: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:40.013+0000] {climarisk_dag.py:145} INFO - ✅ Missour: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:40.589+0000] {climarisk_dag.py:145} INFO - ✅ Guercif: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:41.034+0000] {climarisk_dag.py:145} INFO - ✅ Marrakech: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:41.479+0000] {climarisk_dag.py:145} INFO - ✅ Safi: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:41.927+0000] {climarisk_dag.py:145} INFO - ✅ Essaouira: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:42.425+0000] {climarisk_dag.py:145} INFO - ✅ El Kelaa des Sraghna: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:42.866+0000] {climarisk_dag.py:145} INFO - ✅ Chichaoua: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:43.312+0000] {climarisk_dag.py:145} INFO - ✅ Youssoufia: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:43.749+0000] {climarisk_dag.py:145} INFO - ✅ Ben Guerir: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:44.236+0000] {climarisk_dag.py:145} INFO - ✅ Tahanaout: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:44.616+0000] {climarisk_dag.py:145} INFO - ✅ Ait Ourir: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:45.025+0000] {climarisk_dag.py:145} INFO - ✅ Demnate: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:45.412+0000] {climarisk_dag.py:145} INFO - ✅ Tanger: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:45.800+0000] {climarisk_dag.py:145} INFO - ✅ Tétouan: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:46.252+0000] {climarisk_dag.py:145} INFO - ✅ Al Hoceïma: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:46.738+0000] {climarisk_dag.py:145} INFO - ✅ Larache: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:47.217+0000] {climarisk_dag.py:145} INFO - ✅ Chefchaouen: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:47.634+0000] {climarisk_dag.py:145} INFO - ✅ Asilah: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:48.047+0000] {climarisk_dag.py:145} INFO - ✅ Fnideq: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:48.473+0000] {climarisk_dag.py:145} INFO - ✅ Martil: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:48.902+0000] {climarisk_dag.py:145} INFO - ✅ Mdiq: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:49.378+0000] {climarisk_dag.py:145} INFO - ✅ Ksar el Kebir: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:49.913+0000] {climarisk_dag.py:145} INFO - ✅ Ouazzane: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:50.411+0000] {climarisk_dag.py:145} INFO - ✅ Targuist: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:50.900+0000] {climarisk_dag.py:145} INFO - ✅ Imzouren: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:51.301+0000] {climarisk_dag.py:145} INFO - ✅ Beni Mellal-Khenifra: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:51.702+0000] {climarisk_dag.py:145} INFO - ✅ Khénifra: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:52.273+0000] {climarisk_dag.py:145} INFO - ✅ Azilal: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:52.805+0000] {climarisk_dag.py:145} INFO - ✅ Nanjing: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:53.265+0000] {climarisk_dag.py:145} INFO - ✅ Khouribga: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:54.736+0000] {climarisk_dag.py:145} INFO - ✅ Fkih Ben Salah: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:55.175+0000] {climarisk_dag.py:145} INFO - ✅ Souk Sebt: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:55.649+0000] {climarisk_dag.py:145} INFO - ✅ Midelt: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:56.111+0000] {climarisk_dag.py:145} INFO - ✅ Zaouiat Cheikh: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:56.517+0000] {climarisk_dag.py:145} INFO - ✅ Oujda: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:56.956+0000] {climarisk_dag.py:145} INFO - ✅ Nador: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:57.392+0000] {climarisk_dag.py:145} INFO - ✅ Berkane: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:57.798+0000] {climarisk_dag.py:145} INFO - ✅ Taourirt: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:58.234+0000] {climarisk_dag.py:145} INFO - ✅ Jerada: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:58.713+0000] {climarisk_dag.py:145} INFO - ✅ Figuig: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:59.123+0000] {climarisk_dag.py:145} INFO - ✅ Bouarfa: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:30:59.555+0000] {climarisk_dag.py:145} INFO - ✅ Selouane: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:00.006+0000] {climarisk_dag.py:145} INFO - ✅ Zaio: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:00.420+0000] {climarisk_dag.py:145} INFO - ✅ Agadir: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:00.888+0000] {climarisk_dag.py:145} INFO - ✅ Inezgane: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:01.354+0000] {climarisk_dag.py:145} INFO - ✅ Tiznit: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:01.766+0000] {climarisk_dag.py:145} INFO - ✅ Taroudannt: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:02.216+0000] {climarisk_dag.py:145} INFO - ✅ Ouarzazate: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:02.718+0000] {climarisk_dag.py:145} INFO - ✅ Ait Melloul: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:03.176+0000] {climarisk_dag.py:145} INFO - ✅ Biougra: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:03.702+0000] {climarisk_dag.py:145} INFO - ✅ Chtouka Ait Baha: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:04.110+0000] {climarisk_dag.py:145} INFO - ✅ Tata: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:04.621+0000] {climarisk_dag.py:145} INFO - ✅ Sidi Ifni: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:05.081+0000] {climarisk_dag.py:145} INFO - ✅ Massa: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:05.575+0000] {climarisk_dag.py:145} INFO - ✅ Errachidia: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:05.981+0000] {climarisk_dag.py:145} INFO - ✅ Zagora: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:06.456+0000] {climarisk_dag.py:145} INFO - ✅ Tinghir: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:06.935+0000] {climarisk_dag.py:145} INFO - ✅ Ouarzazate: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:07.459+0000] {climarisk_dag.py:145} INFO - ✅ Rissani: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:07.871+0000] {climarisk_dag.py:145} INFO - ✅ Erfoud: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:08.299+0000] {climarisk_dag.py:145} INFO - ✅ Merzouga: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:08.852+0000] {climarisk_dag.py:145} INFO - ✅ Alnif: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:09.289+0000] {climarisk_dag.py:145} INFO - ✅ Goulmima: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:09.815+0000] {climarisk_dag.py:145} INFO - ✅ Laâyoune: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:10.219+0000] {climarisk_dag.py:145} INFO - ✅ Boujdour: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:10.844+0000] {climarisk_dag.py:145} INFO - ✅ Tarfaya: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:11.329+0000] {climarisk_dag.py:145} INFO - ✅ Smara: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:11.865+0000] {climarisk_dag.py:145} INFO - ✅ El Marsa: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:12.342+0000] {climarisk_dag.py:145} INFO - ✅ Dakhla: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:12.710+0000] {climarisk_dag.py:145} INFO - ✅ Aousserd: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:13.155+0000] {climarisk_dag.py:145} INFO - ✅ Guelmim: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:13.601+0000] {climarisk_dag.py:145} INFO - ✅ Tan-Tan: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:14.154+0000] {climarisk_dag.py:145} INFO - ✅ Assa: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:14.624+0000] {climarisk_dag.py:145} INFO - ✅ Zag: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:15.083+0000] {climarisk_dag.py:145} INFO - ✅ Sidi Ifni: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:15.479+0000] {climarisk_dag.py:145} INFO - ✅ Tiznit: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:15.967+0000] {climarisk_dag.py:145} INFO - ✅ Tunis: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:16.442+0000] {climarisk_dag.py:145} INFO - ✅ Kampala: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:16.890+0000] {climarisk_dag.py:145} INFO - ✅ Dakar: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:17.384+0000] {climarisk_dag.py:145} INFO - ✅ Kinshasa: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:17.907+0000] {climarisk_dag.py:145} INFO - ✅ Luanda: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:18.287+0000] {climarisk_dag.py:145} INFO - ✅ Khartoum: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:18.768+0000] {climarisk_dag.py:145} INFO - ✅ Harare: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:19.309+0000] {climarisk_dag.py:145} INFO - ✅ Lusaka: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:19.785+0000] {climarisk_dag.py:145} INFO - ✅ Maputo: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:20.283+0000] {climarisk_dag.py:145} INFO - ✅ Antananarivo: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:20.683+0000] {climarisk_dag.py:145} INFO - ✅ Abidjan: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:21.160+0000] {climarisk_dag.py:145} INFO - ✅ Douala: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:21.597+0000] {climarisk_dag.py:145} INFO - ✅ Niamey: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:22.075+0000] {climarisk_dag.py:145} INFO - ✅ Ouagadougou: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:22.463+0000] {climarisk_dag.py:145} INFO - ✅ Bamako: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:22.879+0000] {climarisk_dag.py:145} INFO - ✅ Windhoek: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:23.408+0000] {climarisk_dag.py:145} INFO - ✅ Port Harcourt: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:23.897+0000] {climarisk_dag.py:145} INFO - ✅ Warri: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:24.443+0000] {climarisk_dag.py:145} INFO - ✅ Calabar: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:25.815+0000] {climarisk_dag.py:145} INFO - ✅ Beijing: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:26.266+0000] {climarisk_dag.py:145} INFO - ✅ Shanghai: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:26.724+0000] {climarisk_dag.py:145} INFO - ✅ Guangzhou: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:27.101+0000] {climarisk_dag.py:145} INFO - ✅ Chengdu: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:27.582+0000] {climarisk_dag.py:145} INFO - ✅ Wuhan: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:28.047+0000] {climarisk_dag.py:145} INFO - ✅ Chongqing: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:28.508+0000] {climarisk_dag.py:145} INFO - ✅ Zhengzhou: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:28.921+0000] {climarisk_dag.py:145} INFO - ✅ Changsha: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:29.377+0000] {climarisk_dag.py:145} INFO - ✅ Nanchang: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:29.827+0000] {climarisk_dag.py:145} INFO - ✅ Yichang: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:30.307+0000] {climarisk_dag.py:145} INFO - ✅ Haikou: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:30.767+0000] {climarisk_dag.py:145} INFO - ✅ Hong Kong: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:31.303+0000] {climarisk_dag.py:145} INFO - ✅ Taipei: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:31.802+0000] {climarisk_dag.py:145} INFO - ✅ Kaohsiung: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:32.309+0000] {climarisk_dag.py:145} INFO - ✅ Mumbai: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:32.713+0000] {climarisk_dag.py:145} INFO - ✅ Delhi: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:33.135+0000] {climarisk_dag.py:145} INFO - ✅ Bangalore: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:33.580+0000] {climarisk_dag.py:145} INFO - ✅ Chennai: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:33.953+0000] {climarisk_dag.py:145} INFO - ✅ Kolkata: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:34.352+0000] {climarisk_dag.py:145} INFO - ✅ Patna: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:34.795+0000] {climarisk_dag.py:145} INFO - ✅ Guwahati: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:35.250+0000] {climarisk_dag.py:145} INFO - ✅ Varanasi: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:35.714+0000] {climarisk_dag.py:145} INFO - ✅ Muzaffarpur: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:36.387+0000] {climarisk_dag.py:145} INFO - ✅ Visakhapatnam: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:36.980+0000] {climarisk_dag.py:145} INFO - ✅ Vijayawada: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:37.157+0000] {climarisk_dag.py:145} INFO - ✅ Tokyo: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:37.355+0000] {climarisk_dag.py:145} INFO - ✅ Osaka: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:37.592+0000] {climarisk_dag.py:145} INFO - ✅ Sapporo: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:37.826+0000] {climarisk_dag.py:145} INFO - ✅ Naha: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:38.031+0000] {climarisk_dag.py:145} INFO - ✅ Seoul: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:38.164+0000] {climarisk_dag.py:145} INFO - ✅ Busan: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:38.300+0000] {climarisk_dag.py:145} INFO - ✅ Bangkok: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:38.422+0000] {climarisk_dag.py:145} INFO - ✅ Chiang Mai: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:38.543+0000] {climarisk_dag.py:145} INFO - ✅ Jakarta: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:38.663+0000] {climarisk_dag.py:145} INFO - ✅ Surabaya: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:38.794+0000] {climarisk_dag.py:145} INFO - ✅ Medan: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:38.900+0000] {climarisk_dag.py:145} INFO - ✅ Manila: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:38.999+0000] {climarisk_dag.py:145} INFO - ✅ Cebu: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:39.138+0000] {climarisk_dag.py:145} INFO - ✅ Tacloban: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:39.235+0000] {climarisk_dag.py:145} INFO - ✅ Legazpi: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:39.367+0000] {climarisk_dag.py:145} INFO - ✅ Zamboanga: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:39.461+0000] {climarisk_dag.py:145} INFO - ✅ Kuala Lumpur: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:39.546+0000] {climarisk_dag.py:145} INFO - ✅ Singapore: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:39.654+0000] {climarisk_dag.py:145} INFO - ✅ Ho Chi Minh City: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:39.736+0000] {climarisk_dag.py:145} INFO - ✅ Hanoi: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:39.831+0000] {climarisk_dag.py:145} INFO - ✅ Da Nang: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:39.946+0000] {climarisk_dag.py:145} INFO - ✅ Can Tho: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.008+0000] {climarisk_dag.py:145} INFO - ✅ My Tho: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.091+0000] {climarisk_dag.py:145} INFO - ✅ Dhaka: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.162+0000] {climarisk_dag.py:145} INFO - ✅ Chittagong: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.250+0000] {climarisk_dag.py:145} INFO - ✅ Sylhet: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.340+0000] {climarisk_dag.py:145} INFO - ✅ Khulna: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.399+0000] {climarisk_dag.py:145} INFO - ✅ Cox's Bazar: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.461+0000] {climarisk_dag.py:145} INFO - ✅ Karachi: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.518+0000] {climarisk_dag.py:145} INFO - ✅ Lahore: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.575+0000] {climarisk_dag.py:145} INFO - ✅ Colombo: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.640+0000] {climarisk_dag.py:145} INFO - ✅ Kathmandu: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.692+0000] {climarisk_dag.py:145} INFO - ✅ Yangon: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.740+0000] {climarisk_dag.py:145} INFO - ✅ Sittwe: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.791+0000] {climarisk_dag.py:145} INFO - ✅ Phnom Penh: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.861+0000] {climarisk_dag.py:145} INFO - ✅ Riyadh: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.911+0000] {climarisk_dag.py:145} INFO - ✅ Dubai: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:40.966+0000] {climarisk_dag.py:145} INFO - ✅ Tehran: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:41.022+0000] {climarisk_dag.py:145} INFO - ✅ Istanbul: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:41.088+0000] {climarisk_dag.py:145} INFO - ✅ Ankara: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T16:31:41.153+0000] {climarisk_dag.py:145} INFO - ✅ Baghdad: flood=LOW(0.00) fire=LOW(0.14)
+[2026-03-24T22:06:26.922+0000] {climarisk_dag.py:153} ERROR - ❌ Baku: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/fire
+[2026-03-24T22:06:26.927+0000] {climarisk_dag.py:153} ERROR - ❌ Tashkent: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.932+0000] {climarisk_dag.py:153} ERROR - ❌ Almaty: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.935+0000] {climarisk_dag.py:153} ERROR - ❌ Guam: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.940+0000] {climarisk_dag.py:153} ERROR - ❌ Paris: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.945+0000] {climarisk_dag.py:153} ERROR - ❌ Lyon: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.950+0000] {climarisk_dag.py:153} ERROR - ❌ Marseille: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.956+0000] {climarisk_dag.py:153} ERROR - ❌ Toulouse: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.961+0000] {climarisk_dag.py:153} ERROR - ❌ Bordeaux: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.966+0000] {climarisk_dag.py:153} ERROR - ❌ Nantes: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.970+0000] {climarisk_dag.py:153} ERROR - ❌ Strasbourg: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.973+0000] {climarisk_dag.py:153} ERROR - ❌ Lille: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.978+0000] {climarisk_dag.py:153} ERROR - ❌ Montpellier: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.981+0000] {climarisk_dag.py:153} ERROR - ❌ Nice: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.986+0000] {climarisk_dag.py:153} ERROR - ❌ London: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.990+0000] {climarisk_dag.py:153} ERROR - ❌ Birmingham: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.993+0000] {climarisk_dag.py:153} ERROR - ❌ Manchester: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.996+0000] {climarisk_dag.py:153} ERROR - ❌ Berlin: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:26.999+0000] {climarisk_dag.py:153} ERROR - ❌ Hamburg: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.003+0000] {climarisk_dag.py:153} ERROR - ❌ Munich: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.007+0000] {climarisk_dag.py:153} ERROR - ❌ Frankfurt: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.010+0000] {climarisk_dag.py:153} ERROR - ❌ Madrid: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.014+0000] {climarisk_dag.py:153} ERROR - ❌ Barcelona: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.018+0000] {climarisk_dag.py:153} ERROR - ❌ Valencia: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.022+0000] {climarisk_dag.py:153} ERROR - ❌ Malaga: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.026+0000] {climarisk_dag.py:153} ERROR - ❌ Rome: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.029+0000] {climarisk_dag.py:153} ERROR - ❌ Milan: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.032+0000] {climarisk_dag.py:153} ERROR - ❌ Palermo: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.035+0000] {climarisk_dag.py:153} ERROR - ❌ Amsterdam: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.039+0000] {climarisk_dag.py:153} ERROR - ❌ Brussels: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.043+0000] {climarisk_dag.py:153} ERROR - ❌ Vienna: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.046+0000] {climarisk_dag.py:153} ERROR - ❌ Zurich: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.050+0000] {climarisk_dag.py:153} ERROR - ❌ Stockholm: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.057+0000] {climarisk_dag.py:153} ERROR - ❌ Oslo: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.064+0000] {climarisk_dag.py:153} ERROR - ❌ Copenhagen: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.068+0000] {climarisk_dag.py:153} ERROR - ❌ Helsinki: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.073+0000] {climarisk_dag.py:153} ERROR - ❌ Warsaw: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.080+0000] {climarisk_dag.py:153} ERROR - ❌ Prague: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.094+0000] {climarisk_dag.py:153} ERROR - ❌ Budapest: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.100+0000] {climarisk_dag.py:153} ERROR - ❌ Bucharest: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.110+0000] {climarisk_dag.py:153} ERROR - ❌ Athens: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.125+0000] {climarisk_dag.py:153} ERROR - ❌ Thessaloniki: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.149+0000] {climarisk_dag.py:153} ERROR - ❌ Lisbon: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.158+0000] {climarisk_dag.py:153} ERROR - ❌ Moscow: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.167+0000] {climarisk_dag.py:153} ERROR - ❌ Saint Petersburg: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.247+0000] {climarisk_dag.py:153} ERROR - ❌ Krasnoyarsk: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.275+0000] {climarisk_dag.py:153} ERROR - ❌ Irkutsk: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.298+0000] {climarisk_dag.py:153} ERROR - ❌ Yakutsk: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.318+0000] {climarisk_dag.py:153} ERROR - ❌ Khabarovsk: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.410+0000] {climarisk_dag.py:153} ERROR - ❌ Kyiv: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.594+0000] {climarisk_dag.py:153} ERROR - ❌ New York: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.603+0000] {climarisk_dag.py:153} ERROR - ❌ Los Angeles: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.618+0000] {climarisk_dag.py:153} ERROR - ❌ Chicago: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.647+0000] {climarisk_dag.py:153} ERROR - ❌ Houston: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.661+0000] {climarisk_dag.py:153} ERROR - ❌ Miami: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.708+0000] {climarisk_dag.py:153} ERROR - ❌ New Orleans: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.725+0000] {climarisk_dag.py:153} ERROR - ❌ Seattle: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.750+0000] {climarisk_dag.py:153} ERROR - ❌ Sacramento: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.791+0000] {climarisk_dag.py:153} ERROR - ❌ Fresno: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.838+0000] {climarisk_dag.py:153} ERROR - ❌ Redding: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.872+0000] {climarisk_dag.py:153} ERROR - ❌ Memphis: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.914+0000] {climarisk_dag.py:153} ERROR - ❌ Toronto: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.943+0000] {climarisk_dag.py:153} ERROR - ❌ Montreal: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.982+0000] {climarisk_dag.py:153} ERROR - ❌ Vancouver: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:27.997+0000] {climarisk_dag.py:153} ERROR - ❌ Mexico City: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.008+0000] {climarisk_dag.py:153} ERROR - ❌ Veracruz: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.036+0000] {climarisk_dag.py:153} ERROR - ❌ Cancún: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.058+0000] {climarisk_dag.py:153} ERROR - ❌ São Paulo: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.163+0000] {climarisk_dag.py:153} ERROR - ❌ Rio de Janeiro: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.178+0000] {climarisk_dag.py:153} ERROR - ❌ Belém: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.203+0000] {climarisk_dag.py:153} ERROR - ❌ Marabá: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.215+0000] {climarisk_dag.py:153} ERROR - ❌ Sinop: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.225+0000] {climarisk_dag.py:153} ERROR - ❌ Porto Velho: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.237+0000] {climarisk_dag.py:153} ERROR - ❌ Buenos Aires: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.246+0000] {climarisk_dag.py:153} ERROR - ❌ Lima: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.255+0000] {climarisk_dag.py:153} ERROR - ❌ Bogotá: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.264+0000] {climarisk_dag.py:153} ERROR - ❌ Santiago: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.273+0000] {climarisk_dag.py:153} ERROR - ❌ Port-au-Prince: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.285+0000] {climarisk_dag.py:153} ERROR - ❌ San Juan: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.299+0000] {climarisk_dag.py:153} ERROR - ❌ Kingston: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.309+0000] {climarisk_dag.py:153} ERROR - ❌ Port of Spain: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.320+0000] {climarisk_dag.py:153} ERROR - ❌ Sydney: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.337+0000] {climarisk_dag.py:153} ERROR - ❌ Melbourne: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.350+0000] {climarisk_dag.py:153} ERROR - ❌ Brisbane: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.359+0000] {climarisk_dag.py:153} ERROR - ❌ Darwin: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.375+0000] {climarisk_dag.py:153} ERROR - ❌ Alice Springs: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.392+0000] {climarisk_dag.py:153} ERROR - ❌ Cairns: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.405+0000] {climarisk_dag.py:153} ERROR - ❌ Auckland: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.417+0000] {climarisk_dag.py:153} ERROR - ❌ Port Moresby: 401 Client Error: Unauthorized for url: http://backend:8000/api/predictions/flood
+[2026-03-24T22:06:28.423+0000] {climarisk_dag.py:157} INFO - ✅ Done: 202 OK, 89 errors, 20185.8s
+[2026-03-24T22:06:28.505+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-24T22:06:28.513+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/climarisk_dag.py", line 166, in predict_all_zones
+    raise Exception(f"{errors} zone(s) failed — check logs above")
+Exception: 89 zone(s) failed — check logs above
+[2026-03-24T22:06:28.587+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=***_predictions, task_id=predict_all_zones, run_id=scheduled__2026-03-24T16:00:00+00:00, execution_date=20260324T160000, start_date=20260324T163001, end_date=20260324T220628
+[2026-03-24T22:06:28.642+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 441 for task predict_all_zones (89 zone(s) failed — check logs above; 23448)
+[2026-03-24T22:06:28.663+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-24T22:06:28.756+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-24T22:06:28.785+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,138 +1,104 @@
-"""
-ClimaRisk ML Training Pipeline — v6
-=====================================
-Flood: MODIS dataset — retrained with ONLY weather API features
-       precip_1d, precip_3d, soil_moisture, upstream_area (river proxy)
-       These are exactly what Open-Meteo provides in real time.
-
-Fire:  Canadian FWI formula (no ML — weather alone insufficient)
-"""
-
-import json
-import joblib
-import numpy as np
-import pandas as pd
+import json, joblib, numpy as np, pandas as pd, os
 from pathlib import Path
-from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, roc_auc_score
-from imblearn.over_sampling import SMOTE
 from xgboost import XGBClassifier
 
-FLOOD_CSV  = Path("/app/data/csvs/flood/flood.csv")
+FLOOD_CSV  = Path("/app/data/csvs/flood/flood_cleaned.csv")
 MODELS_DIR = Path("/app/data/models")
 MODELS_DIR.mkdir(parents=True, exist_ok=True)
 
+# FIX: jrc_perm_water added — strongest static predictor
+FEATURES = [
+    "precip_1d", "precip_3d", "NDVI", "NDWI",
+    "jrc_perm_water",
+    "landcover", "elevation", "slope", "upstream_area", "TWI",
+    "saturation_idx", "rain_burst_ratio",
+    "topo_flood_potential", "veg_absorption",
+]
+TARGET = "target"
 
-def train_flood():
-    print("\n" + "="*60)
-    print("🌊  FLOOD MODEL TRAINING v6 — Weather API features only")
-    print("="*60)
 
-    print("📄 Loading flood dataset...")
-    df = pd.read_csv(FLOOD_CSV)
-    print(f"   {len(df):,} rows loaded")
+def train():
+    print(f"🚀 Loading Cleaned Dataset: {FLOOD_CSV}")
 
-    # Only features available from Open-Meteo weather API
-    FEATURES = [
-        "precip_1d",      # rainfall last 24h (mm)      → rainfall_mm
-        "precip_3d",      # rainfall last 72h (mm)      → _daily_rainfall_mm * 3
-        "soil_moisture_0_to_1cm" if "soil_moisture_0_to_1cm" in df.columns else "TWI",  # soil moisture
-        "upstream_area",  # watershed/river proxy        → river_level_m derived
-    ]
+    if not FLOOD_CSV.exists():
+        print(f"❌ Error: {FLOOD_CSV} not found. Run the cleaning pipeline first!")
+        return
 
-    # Check which soil moisture column exists
-    if "soil_moisture_0_to_1cm" in df.columns:
-        soil_col = "soil_moisture_0_to_1cm"
-    else:
-        soil_col = "TWI"  # TWI is topographic wetness — best proxy for soil moisture
-        print(f"   Using TWI as soil moisture proxy")
+    df = pd.read_csv(FLOOD_CSV, usecols=FEATURES + [TARGET])
 
-    FEATURES = ["precip_1d", "precip_3d", soil_col, "upstream_area"]
-    TARGET   = "target"
+    neg   = (df[TARGET] == 0).sum()
+    pos   = (df[TARGET] == 1).sum()
+    ratio = neg / pos if pos > 0 else 1
 
-    df = df[FEATURES + [TARGET]].dropna()
-    print(f"   {len(df):,} rows after dropping nulls")
-    print(f"   Class balance: {df[TARGET].value_counts().to_dict()}")
-    print(f"   Features: {FEATURES}")
+    X = df[FEATURES]
+    y = df[TARGET]
 
-    X = df[FEATURES].values
-    y = df[TARGET].values
-
-    # 5-fold CV first
-    print("\n📊 Running 5-fold cross-validation...")
-    cv_model = XGBClassifier(
-        n_estimators=300, max_depth=5, learning_rate=0.05,
-        subsample=0.8, colsample_bytree=0.8, min_child_weight=3,
-        reg_alpha=0.1, reg_lambda=1.0, random_state=42,
-        n_jobs=-1, tree_method="hist", device="cuda",
-    )
-    skf    = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-    cv_auc = cross_val_score(cv_model, X, y, cv=skf, scoring="roc_auc")
-    print(f"   CV AUC: {cv_auc.mean():.4f} ± {cv_auc.std():.4f}")
-
-    # Train/test split
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42, stratify=y
+        X, y, test_size=0.1, stratify=y, random_state=42
     )
-    print(f"   Train: {len(X_train):,}  Test: {len(X_test):,}")
 
-    # SMOTE for imbalanced classes
-    if y.mean() < 0.3:
-        print(f"   ⚖️  Imbalanced ({y.mean():.1%}) — applying SMOTE...")
-        smote = SMOTE(random_state=42)
-        X_train, y_train = smote.fit_resample(X_train, y_train)
-        print(f"   After SMOTE: {len(X_train):,} samples")
+    print(f"📊 Dataset: {len(df):,} rows | Imbalance Ratio: {ratio:.1f}")
 
-    print("🚀 Training XGBoost flood classifier...")
+    # FIX: subsample + colsample_bytree added to prevent overfitting
+    # FIX: min_child_weight=10 prevents splits on tiny flood clusters
     model = XGBClassifier(
-        n_estimators=500, max_depth=5, learning_rate=0.05,
-        subsample=0.8, colsample_bytree=0.8, min_child_weight=3,
-        reg_alpha=0.1, reg_lambda=1.0, eval_metric="logloss",
-        early_stopping_rounds=30, random_state=42,
-        n_jobs=-1, tree_method="hist", device="cuda",
+        n_estimators=500,
+        max_depth=6,
+        learning_rate=0.05,
+        scale_pos_weight=ratio,
+        subsample=0.8,
+        colsample_bytree=0.8,
+        min_child_weight=10,
+        tree_method="hist",
+        device="cuda" if os.path.exists("/usr/local/cuda") else "cpu",
+        random_state=42,
     )
-    model.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=50)
+
+    print("🏋️  Training on 1M rows (with Early Stopping)...")
+    model.fit(
+        X_train, y_train,
+        eval_set=[(X_test, y_test)],
+        early_stopping_rounds=50,
+        verbose=50,
+    )
 
     y_pred  = model.predict(X_test)
     y_proba = model.predict_proba(X_test)[:, 1]
-    auc     = roc_auc_score(y_test, y_proba)
+    auc     = float(roc_auc_score(y_test, y_proba))
 
-    print(f"\n📊 Flood Model Results:")
-    print(f"   AUC-ROC: {auc:.4f}")
-    print(f"   CV AUC:  {cv_auc.mean():.4f} ± {cv_auc.std():.4f}")
-    print(classification_report(y_pred, y_test, target_names=["No Flood", "Flood"]))
-
-    importance = dict(sorted(zip(FEATURES, model.feature_importances_.tolist()), key=lambda x: x[1], reverse=True))
-    print("📈 Feature importance:")
-    for feat, imp in importance.items():
-        print(f"   {feat:<25} {imp:.4f}")
+    print("\n" + "="*30)
+    print("      FINAL RESULTS")
+    print("="*30)
+    print(f"AUC-ROC: {auc:.4f}")
+    print(classification_report(y_test, y_pred))
 
     joblib.dump(model, MODELS_DIR / "flood_model.pkl")
-    with open(MODELS_DIR / "flood_features.json", "w") as f:
-        json.dump({
-            "features": FEATURES,
-            "soil_col": soil_col,
-            "importance": importance,
-            "auc": auc,
-            "cv_auc_mean": float(cv_auc.mean()),
-            "cv_auc_std": float(cv_auc.std()),
-            "version": "6.0.0"
-        }, f, indent=2)
 
-    print(f"\n✅ Flood model saved → {MODELS_DIR}/flood_model.pkl")
-    return model, FEATURES, soil_col
+    # FIX: importance sort by score (x[1]), not by tuple (x)
+    importance_scores = model.feature_importances_.tolist()
+    importance_map = dict(sorted(
+        zip(FEATURES, importance_scores),
+        key=lambda x: x[1],
+        reverse=True,
+    ))
+
+    # FIX: auc stored at top level so predict.py can read it directly
+    meta = {
+        "features":  FEATURES,
+        "version":   "1.1.0-engineered",
+        "auc":       auc,
+        "n_samples": len(df),
+        "importance": importance_map,
+        "metrics":   {"auc": auc},
+    }
+
+    with open(MODELS_DIR / "flood_features.json", "w") as f:
+        json.dump(meta, f, indent=2)
+
+    print(f"\n✅ Model saved to {MODELS_DIR}")
 
 
 if __name__ == "__main__":
-    print("\n🌍 ClimaRisk ML Training Pipeline v6")
-    print("="*60)
-    print("Training flood model with weather-API-only features...")
-
-    model, features, soil_col = train_flood()
-
-    print("\n" + "="*60)
-    print("✅ Flood model trained and saved!")
-    print(f"   Features used: {features}")
-    print(f"   Soil column:   {soil_col}")
-    print("\nFire model: using Canadian FWI formula (no retraining needed)")
-    print("\nNext: restart backend to load the new model.")
+    train()

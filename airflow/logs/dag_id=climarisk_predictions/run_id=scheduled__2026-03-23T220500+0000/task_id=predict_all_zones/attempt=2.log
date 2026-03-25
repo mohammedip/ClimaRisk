@@ -1,0 +1,330 @@
+[2026-03-23T22:08:29.553+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-23T22:08:29.615+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: climarisk_predictions.predict_all_zones scheduled__2026-03-23T22:05:00+00:00 [queued]>
+[2026-03-23T22:08:29.629+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: climarisk_predictions.predict_all_zones scheduled__2026-03-23T22:05:00+00:00 [queued]>
+[2026-03-23T22:08:29.630+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2026-03-23T22:08:29.650+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): predict_all_zones> on 2026-03-23 22:05:00+00:00
+[2026-03-23T22:08:29.662+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=6305) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-03-23T22:08:29.664+0000] {standard_task_runner.py:63} INFO - Started process 6306 to run task
+[2026-03-23T22:08:29.662+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', '***_predictions', 'predict_all_zones', 'scheduled__2026-03-23T22:05:00+00:00', '--job-id', '249', '--raw', '--subdir', 'DAGS_FOLDER/***_dag.py', '--cfg-path', '/tmp/tmpjd_qt3b_']
+[2026-03-23T22:08:29.666+0000] {standard_task_runner.py:91} INFO - Job 249: Subtask predict_all_zones
+[2026-03-23T22:08:29.768+0000] {task_command.py:426} INFO - Running <TaskInstance: climarisk_predictions.predict_all_zones scheduled__2026-03-23T22:05:00+00:00 [running]> on host 6146f0e8983c
+[2026-03-23T22:08:29.977+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='***_predictions' AIRFLOW_CTX_TASK_ID='predict_all_zones' AIRFLOW_CTX_EXECUTION_DATE='2026-03-23T22:05:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-23T22:05:00+00:00'
+[2026-03-23T22:08:29.979+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-23T22:08:30.035+0000] {climarisk_dag.py:194} ERROR - ❌ Alger: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.041+0000] {climarisk_dag.py:194} ERROR - ❌ Cairo: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.045+0000] {climarisk_dag.py:194} ERROR - ❌ Lagos: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.048+0000] {climarisk_dag.py:194} ERROR - ❌ Kano: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.052+0000] {climarisk_dag.py:194} ERROR - ❌ Abuja: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.055+0000] {climarisk_dag.py:194} ERROR - ❌ Johannesburg: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.058+0000] {climarisk_dag.py:194} ERROR - ❌ Cape Town: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.063+0000] {climarisk_dag.py:194} ERROR - ❌ Nairobi: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.067+0000] {climarisk_dag.py:194} ERROR - ❌ Addis Ababa: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.070+0000] {climarisk_dag.py:194} ERROR - ❌ Dar es Salaam: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.073+0000] {climarisk_dag.py:194} ERROR - ❌ Accra: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.077+0000] {climarisk_dag.py:194} ERROR - ❌ Casablanca: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.082+0000] {climarisk_dag.py:194} ERROR - ❌ Mohammedia: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.085+0000] {climarisk_dag.py:194} ERROR - ❌ El Jadida: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.089+0000] {climarisk_dag.py:194} ERROR - ❌ Settat: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.092+0000] {climarisk_dag.py:194} ERROR - ❌ Berrechid: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.096+0000] {climarisk_dag.py:194} ERROR - ❌ Benslimane: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.099+0000] {climarisk_dag.py:194} ERROR - ❌ Sidi Bennour: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.103+0000] {climarisk_dag.py:194} ERROR - ❌ Azemmour: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.106+0000] {climarisk_dag.py:194} ERROR - ❌ Mediouna: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.110+0000] {climarisk_dag.py:194} ERROR - ❌ Nouaceur: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.114+0000] {climarisk_dag.py:194} ERROR - ❌ Rabat: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.117+0000] {climarisk_dag.py:194} ERROR - ❌ Salé: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.120+0000] {climarisk_dag.py:194} ERROR - ❌ Kénitra: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.125+0000] {climarisk_dag.py:194} ERROR - ❌ Témara: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.129+0000] {climarisk_dag.py:194} ERROR - ❌ Skhirat: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.132+0000] {climarisk_dag.py:194} ERROR - ❌ Tiflet: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.135+0000] {climarisk_dag.py:194} ERROR - ❌ Khémisset: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.138+0000] {climarisk_dag.py:194} ERROR - ❌ Sidi Slimane: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.142+0000] {climarisk_dag.py:194} ERROR - ❌ Sidi Kacem: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.146+0000] {climarisk_dag.py:194} ERROR - ❌ Souk el Arba: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.150+0000] {climarisk_dag.py:194} ERROR - ❌ Ouazzane: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.153+0000] {climarisk_dag.py:194} ERROR - ❌ Fès: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.156+0000] {climarisk_dag.py:194} ERROR - ❌ Meknès: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.159+0000] {climarisk_dag.py:194} ERROR - ❌ Ifrane: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.163+0000] {climarisk_dag.py:194} ERROR - ❌ Azrou: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.167+0000] {climarisk_dag.py:194} ERROR - ❌ Taounate: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.170+0000] {climarisk_dag.py:194} ERROR - ❌ Taza: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.174+0000] {climarisk_dag.py:194} ERROR - ❌ Sefrou: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.177+0000] {climarisk_dag.py:194} ERROR - ❌ Boulemane: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.181+0000] {climarisk_dag.py:194} ERROR - ❌ El Hajeb: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.186+0000] {climarisk_dag.py:194} ERROR - ❌ Missour: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.189+0000] {climarisk_dag.py:194} ERROR - ❌ Guercif: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.192+0000] {climarisk_dag.py:194} ERROR - ❌ Marrakech: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.202+0000] {climarisk_dag.py:194} ERROR - ❌ Safi: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.205+0000] {climarisk_dag.py:194} ERROR - ❌ Essaouira: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.208+0000] {climarisk_dag.py:194} ERROR - ❌ El Kelaa des Sraghna: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.211+0000] {climarisk_dag.py:194} ERROR - ❌ Chichaoua: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.214+0000] {climarisk_dag.py:194} ERROR - ❌ Youssoufia: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.217+0000] {climarisk_dag.py:194} ERROR - ❌ Ben Guerir: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.220+0000] {climarisk_dag.py:194} ERROR - ❌ Tahanaout: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.223+0000] {climarisk_dag.py:194} ERROR - ❌ Ait Ourir: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.227+0000] {climarisk_dag.py:194} ERROR - ❌ Demnate: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.231+0000] {climarisk_dag.py:194} ERROR - ❌ Tanger: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.234+0000] {climarisk_dag.py:194} ERROR - ❌ Tétouan: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.237+0000] {climarisk_dag.py:194} ERROR - ❌ Al Hoceïma: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.240+0000] {climarisk_dag.py:194} ERROR - ❌ Larache: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.244+0000] {climarisk_dag.py:194} ERROR - ❌ Chefchaouen: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.247+0000] {climarisk_dag.py:194} ERROR - ❌ Asilah: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.251+0000] {climarisk_dag.py:194} ERROR - ❌ Fnideq: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.254+0000] {climarisk_dag.py:194} ERROR - ❌ Martil: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.257+0000] {climarisk_dag.py:194} ERROR - ❌ Mdiq: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.260+0000] {climarisk_dag.py:194} ERROR - ❌ Ksar el Kebir: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.263+0000] {climarisk_dag.py:194} ERROR - ❌ Ouazzane: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.267+0000] {climarisk_dag.py:194} ERROR - ❌ Targuist: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.270+0000] {climarisk_dag.py:194} ERROR - ❌ Imzouren: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.274+0000] {climarisk_dag.py:194} ERROR - ❌ Beni Mellal-Khenifra: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.277+0000] {climarisk_dag.py:194} ERROR - ❌ Khénifra: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.280+0000] {climarisk_dag.py:194} ERROR - ❌ Azilal: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.283+0000] {climarisk_dag.py:194} ERROR - ❌ Nanjing: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.286+0000] {climarisk_dag.py:194} ERROR - ❌ Khouribga: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.289+0000] {climarisk_dag.py:194} ERROR - ❌ Fkih Ben Salah: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.292+0000] {climarisk_dag.py:194} ERROR - ❌ Souk Sebt: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.295+0000] {climarisk_dag.py:194} ERROR - ❌ Midelt: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.299+0000] {climarisk_dag.py:194} ERROR - ❌ Zaouiat Cheikh: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.303+0000] {climarisk_dag.py:194} ERROR - ❌ Oujda: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.307+0000] {climarisk_dag.py:194} ERROR - ❌ Nador: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.311+0000] {climarisk_dag.py:194} ERROR - ❌ Berkane: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.314+0000] {climarisk_dag.py:194} ERROR - ❌ Taourirt: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.318+0000] {climarisk_dag.py:194} ERROR - ❌ Jerada: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.320+0000] {climarisk_dag.py:194} ERROR - ❌ Figuig: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.324+0000] {climarisk_dag.py:194} ERROR - ❌ Bouarfa: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.328+0000] {climarisk_dag.py:194} ERROR - ❌ Selouane: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.331+0000] {climarisk_dag.py:194} ERROR - ❌ Zaio: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.335+0000] {climarisk_dag.py:194} ERROR - ❌ Agadir: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.338+0000] {climarisk_dag.py:194} ERROR - ❌ Inezgane: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.341+0000] {climarisk_dag.py:194} ERROR - ❌ Tiznit: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.344+0000] {climarisk_dag.py:194} ERROR - ❌ Taroudannt: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.347+0000] {climarisk_dag.py:194} ERROR - ❌ Ouarzazate: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.350+0000] {climarisk_dag.py:194} ERROR - ❌ Ait Melloul: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.354+0000] {climarisk_dag.py:194} ERROR - ❌ Biougra: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.357+0000] {climarisk_dag.py:194} ERROR - ❌ Chtouka Ait Baha: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.360+0000] {climarisk_dag.py:194} ERROR - ❌ Tata: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.363+0000] {climarisk_dag.py:194} ERROR - ❌ Sidi Ifni: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.366+0000] {climarisk_dag.py:194} ERROR - ❌ Massa: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.369+0000] {climarisk_dag.py:194} ERROR - ❌ Errachidia: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.372+0000] {climarisk_dag.py:194} ERROR - ❌ Zagora: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.375+0000] {climarisk_dag.py:194} ERROR - ❌ Tinghir: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.378+0000] {climarisk_dag.py:194} ERROR - ❌ Ouarzazate: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.380+0000] {climarisk_dag.py:194} ERROR - ❌ Rissani: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.383+0000] {climarisk_dag.py:194} ERROR - ❌ Erfoud: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.386+0000] {climarisk_dag.py:194} ERROR - ❌ Merzouga: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.389+0000] {climarisk_dag.py:194} ERROR - ❌ Alnif: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.393+0000] {climarisk_dag.py:194} ERROR - ❌ Goulmima: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.397+0000] {climarisk_dag.py:194} ERROR - ❌ Laâyoune: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.400+0000] {climarisk_dag.py:194} ERROR - ❌ Boujdour: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.403+0000] {climarisk_dag.py:194} ERROR - ❌ Tarfaya: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.406+0000] {climarisk_dag.py:194} ERROR - ❌ Smara: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.409+0000] {climarisk_dag.py:194} ERROR - ❌ El Marsa: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.412+0000] {climarisk_dag.py:194} ERROR - ❌ Dakhla: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.416+0000] {climarisk_dag.py:194} ERROR - ❌ Aousserd: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.444+0000] {climarisk_dag.py:194} ERROR - ❌ Guelmim: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.448+0000] {climarisk_dag.py:194} ERROR - ❌ Tan-Tan: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.451+0000] {climarisk_dag.py:194} ERROR - ❌ Assa: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.455+0000] {climarisk_dag.py:194} ERROR - ❌ Zag: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.458+0000] {climarisk_dag.py:194} ERROR - ❌ Sidi Ifni: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.462+0000] {climarisk_dag.py:194} ERROR - ❌ Tiznit: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.465+0000] {climarisk_dag.py:194} ERROR - ❌ Tunis: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.468+0000] {climarisk_dag.py:194} ERROR - ❌ Kampala: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.471+0000] {climarisk_dag.py:194} ERROR - ❌ Dakar: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.475+0000] {climarisk_dag.py:194} ERROR - ❌ Kinshasa: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.478+0000] {climarisk_dag.py:194} ERROR - ❌ Luanda: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.482+0000] {climarisk_dag.py:194} ERROR - ❌ Khartoum: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.485+0000] {climarisk_dag.py:194} ERROR - ❌ Harare: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.489+0000] {climarisk_dag.py:194} ERROR - ❌ Lusaka: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.493+0000] {climarisk_dag.py:194} ERROR - ❌ Maputo: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.496+0000] {climarisk_dag.py:194} ERROR - ❌ Antananarivo: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.499+0000] {climarisk_dag.py:194} ERROR - ❌ Abidjan: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.502+0000] {climarisk_dag.py:194} ERROR - ❌ Douala: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.506+0000] {climarisk_dag.py:194} ERROR - ❌ Niamey: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.509+0000] {climarisk_dag.py:194} ERROR - ❌ Ouagadougou: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.512+0000] {climarisk_dag.py:194} ERROR - ❌ Bamako: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.515+0000] {climarisk_dag.py:194} ERROR - ❌ Windhoek: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.518+0000] {climarisk_dag.py:194} ERROR - ❌ Port Harcourt: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.522+0000] {climarisk_dag.py:194} ERROR - ❌ Warri: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.524+0000] {climarisk_dag.py:194} ERROR - ❌ Calabar: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.527+0000] {climarisk_dag.py:194} ERROR - ❌ Beijing: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.531+0000] {climarisk_dag.py:194} ERROR - ❌ Shanghai: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.535+0000] {climarisk_dag.py:194} ERROR - ❌ Guangzhou: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.538+0000] {climarisk_dag.py:194} ERROR - ❌ Chengdu: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.541+0000] {climarisk_dag.py:194} ERROR - ❌ Wuhan: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.544+0000] {climarisk_dag.py:194} ERROR - ❌ Chongqing: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.547+0000] {climarisk_dag.py:194} ERROR - ❌ Zhengzhou: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.551+0000] {climarisk_dag.py:194} ERROR - ❌ Changsha: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.553+0000] {climarisk_dag.py:194} ERROR - ❌ Nanchang: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.556+0000] {climarisk_dag.py:194} ERROR - ❌ Yichang: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.559+0000] {climarisk_dag.py:194} ERROR - ❌ Haikou: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.562+0000] {climarisk_dag.py:194} ERROR - ❌ Hong Kong: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.566+0000] {climarisk_dag.py:194} ERROR - ❌ Taipei: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.569+0000] {climarisk_dag.py:194} ERROR - ❌ Kaohsiung: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.572+0000] {climarisk_dag.py:194} ERROR - ❌ Mumbai: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.575+0000] {climarisk_dag.py:194} ERROR - ❌ Delhi: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.578+0000] {climarisk_dag.py:194} ERROR - ❌ Bangalore: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.582+0000] {climarisk_dag.py:194} ERROR - ❌ Chennai: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.585+0000] {climarisk_dag.py:194} ERROR - ❌ Kolkata: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.589+0000] {climarisk_dag.py:194} ERROR - ❌ Patna: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.593+0000] {climarisk_dag.py:194} ERROR - ❌ Guwahati: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.596+0000] {climarisk_dag.py:194} ERROR - ❌ Varanasi: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.599+0000] {climarisk_dag.py:194} ERROR - ❌ Muzaffarpur: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.602+0000] {climarisk_dag.py:194} ERROR - ❌ Visakhapatnam: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.605+0000] {climarisk_dag.py:194} ERROR - ❌ Vijayawada: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.609+0000] {climarisk_dag.py:194} ERROR - ❌ Tokyo: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.612+0000] {climarisk_dag.py:194} ERROR - ❌ Osaka: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.616+0000] {climarisk_dag.py:194} ERROR - ❌ Sapporo: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.619+0000] {climarisk_dag.py:194} ERROR - ❌ Naha: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.622+0000] {climarisk_dag.py:194} ERROR - ❌ Seoul: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.626+0000] {climarisk_dag.py:194} ERROR - ❌ Busan: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.630+0000] {climarisk_dag.py:194} ERROR - ❌ Bangkok: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.633+0000] {climarisk_dag.py:194} ERROR - ❌ Chiang Mai: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.636+0000] {climarisk_dag.py:194} ERROR - ❌ Jakarta: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.639+0000] {climarisk_dag.py:194} ERROR - ❌ Surabaya: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.642+0000] {climarisk_dag.py:194} ERROR - ❌ Medan: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.646+0000] {climarisk_dag.py:194} ERROR - ❌ Manila: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.650+0000] {climarisk_dag.py:194} ERROR - ❌ Cebu: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.653+0000] {climarisk_dag.py:194} ERROR - ❌ Tacloban: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.656+0000] {climarisk_dag.py:194} ERROR - ❌ Legazpi: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.659+0000] {climarisk_dag.py:194} ERROR - ❌ Zamboanga: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.662+0000] {climarisk_dag.py:194} ERROR - ❌ Kuala Lumpur: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.666+0000] {climarisk_dag.py:194} ERROR - ❌ Singapore: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.669+0000] {climarisk_dag.py:194} ERROR - ❌ Ho Chi Minh City: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.673+0000] {climarisk_dag.py:194} ERROR - ❌ Hanoi: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.676+0000] {climarisk_dag.py:194} ERROR - ❌ Da Nang: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.679+0000] {climarisk_dag.py:194} ERROR - ❌ Can Tho: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.682+0000] {climarisk_dag.py:194} ERROR - ❌ My Tho: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.686+0000] {climarisk_dag.py:194} ERROR - ❌ Dhaka: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.689+0000] {climarisk_dag.py:194} ERROR - ❌ Chittagong: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.693+0000] {climarisk_dag.py:194} ERROR - ❌ Sylhet: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.697+0000] {climarisk_dag.py:194} ERROR - ❌ Khulna: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.701+0000] {climarisk_dag.py:194} ERROR - ❌ Cox's Bazar: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.705+0000] {climarisk_dag.py:194} ERROR - ❌ Karachi: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.708+0000] {climarisk_dag.py:194} ERROR - ❌ Lahore: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.711+0000] {climarisk_dag.py:194} ERROR - ❌ Colombo: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.715+0000] {climarisk_dag.py:194} ERROR - ❌ Kathmandu: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.718+0000] {climarisk_dag.py:194} ERROR - ❌ Yangon: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.721+0000] {climarisk_dag.py:194} ERROR - ❌ Sittwe: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.724+0000] {climarisk_dag.py:194} ERROR - ❌ Phnom Penh: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.728+0000] {climarisk_dag.py:194} ERROR - ❌ Riyadh: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.731+0000] {climarisk_dag.py:194} ERROR - ❌ Dubai: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.734+0000] {climarisk_dag.py:194} ERROR - ❌ Tehran: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.737+0000] {climarisk_dag.py:194} ERROR - ❌ Istanbul: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.740+0000] {climarisk_dag.py:194} ERROR - ❌ Ankara: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.743+0000] {climarisk_dag.py:194} ERROR - ❌ Baghdad: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.746+0000] {climarisk_dag.py:194} ERROR - ❌ Baku: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.749+0000] {climarisk_dag.py:194} ERROR - ❌ Tashkent: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.753+0000] {climarisk_dag.py:194} ERROR - ❌ Almaty: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.756+0000] {climarisk_dag.py:194} ERROR - ❌ Guam: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.759+0000] {climarisk_dag.py:194} ERROR - ❌ Paris: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.762+0000] {climarisk_dag.py:194} ERROR - ❌ Lyon: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.764+0000] {climarisk_dag.py:194} ERROR - ❌ Marseille: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.767+0000] {climarisk_dag.py:194} ERROR - ❌ Toulouse: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.770+0000] {climarisk_dag.py:194} ERROR - ❌ Bordeaux: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.773+0000] {climarisk_dag.py:194} ERROR - ❌ Nantes: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.776+0000] {climarisk_dag.py:194} ERROR - ❌ Strasbourg: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.779+0000] {climarisk_dag.py:194} ERROR - ❌ Lille: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.782+0000] {climarisk_dag.py:194} ERROR - ❌ Montpellier: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.785+0000] {climarisk_dag.py:194} ERROR - ❌ Nice: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.788+0000] {climarisk_dag.py:194} ERROR - ❌ London: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.791+0000] {climarisk_dag.py:194} ERROR - ❌ Birmingham: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.794+0000] {climarisk_dag.py:194} ERROR - ❌ Manchester: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.796+0000] {climarisk_dag.py:194} ERROR - ❌ Berlin: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.799+0000] {climarisk_dag.py:194} ERROR - ❌ Hamburg: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.802+0000] {climarisk_dag.py:194} ERROR - ❌ Munich: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.805+0000] {climarisk_dag.py:194} ERROR - ❌ Frankfurt: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.807+0000] {climarisk_dag.py:194} ERROR - ❌ Madrid: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.810+0000] {climarisk_dag.py:194} ERROR - ❌ Barcelona: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.813+0000] {climarisk_dag.py:194} ERROR - ❌ Valencia: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.815+0000] {climarisk_dag.py:194} ERROR - ❌ Malaga: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.818+0000] {climarisk_dag.py:194} ERROR - ❌ Rome: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.821+0000] {climarisk_dag.py:194} ERROR - ❌ Milan: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.823+0000] {climarisk_dag.py:194} ERROR - ❌ Palermo: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.826+0000] {climarisk_dag.py:194} ERROR - ❌ Amsterdam: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.829+0000] {climarisk_dag.py:194} ERROR - ❌ Brussels: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.831+0000] {climarisk_dag.py:194} ERROR - ❌ Vienna: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.834+0000] {climarisk_dag.py:194} ERROR - ❌ Zurich: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.838+0000] {climarisk_dag.py:194} ERROR - ❌ Stockholm: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.840+0000] {climarisk_dag.py:194} ERROR - ❌ Oslo: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.843+0000] {climarisk_dag.py:194} ERROR - ❌ Copenhagen: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.845+0000] {climarisk_dag.py:194} ERROR - ❌ Helsinki: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.848+0000] {climarisk_dag.py:194} ERROR - ❌ Warsaw: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.850+0000] {climarisk_dag.py:194} ERROR - ❌ Prague: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.853+0000] {climarisk_dag.py:194} ERROR - ❌ Budapest: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.856+0000] {climarisk_dag.py:194} ERROR - ❌ Bucharest: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.859+0000] {climarisk_dag.py:194} ERROR - ❌ Athens: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.861+0000] {climarisk_dag.py:194} ERROR - ❌ Thessaloniki: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.864+0000] {climarisk_dag.py:194} ERROR - ❌ Lisbon: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.867+0000] {climarisk_dag.py:194} ERROR - ❌ Moscow: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.870+0000] {climarisk_dag.py:194} ERROR - ❌ Saint Petersburg: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.872+0000] {climarisk_dag.py:194} ERROR - ❌ Krasnoyarsk: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.875+0000] {climarisk_dag.py:194} ERROR - ❌ Irkutsk: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.878+0000] {climarisk_dag.py:194} ERROR - ❌ Yakutsk: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.881+0000] {climarisk_dag.py:194} ERROR - ❌ Khabarovsk: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.883+0000] {climarisk_dag.py:194} ERROR - ❌ Kyiv: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.886+0000] {climarisk_dag.py:194} ERROR - ❌ New York: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.889+0000] {climarisk_dag.py:194} ERROR - ❌ Los Angeles: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.892+0000] {climarisk_dag.py:194} ERROR - ❌ Chicago: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.894+0000] {climarisk_dag.py:194} ERROR - ❌ Houston: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.897+0000] {climarisk_dag.py:194} ERROR - ❌ Miami: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.900+0000] {climarisk_dag.py:194} ERROR - ❌ New Orleans: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.903+0000] {climarisk_dag.py:194} ERROR - ❌ Seattle: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.905+0000] {climarisk_dag.py:194} ERROR - ❌ Sacramento: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.909+0000] {climarisk_dag.py:194} ERROR - ❌ Fresno: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.911+0000] {climarisk_dag.py:194} ERROR - ❌ Redding: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.915+0000] {climarisk_dag.py:194} ERROR - ❌ Memphis: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.917+0000] {climarisk_dag.py:194} ERROR - ❌ Toronto: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.921+0000] {climarisk_dag.py:194} ERROR - ❌ Montreal: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.923+0000] {climarisk_dag.py:194} ERROR - ❌ Vancouver: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.926+0000] {climarisk_dag.py:194} ERROR - ❌ Mexico City: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.930+0000] {climarisk_dag.py:194} ERROR - ❌ Veracruz: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.932+0000] {climarisk_dag.py:194} ERROR - ❌ Cancún: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.936+0000] {climarisk_dag.py:194} ERROR - ❌ São Paulo: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.938+0000] {climarisk_dag.py:194} ERROR - ❌ Rio de Janeiro: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.941+0000] {climarisk_dag.py:194} ERROR - ❌ Belém: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.944+0000] {climarisk_dag.py:194} ERROR - ❌ Marabá: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.947+0000] {climarisk_dag.py:194} ERROR - ❌ Sinop: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.949+0000] {climarisk_dag.py:194} ERROR - ❌ Porto Velho: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.952+0000] {climarisk_dag.py:194} ERROR - ❌ Buenos Aires: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.955+0000] {climarisk_dag.py:194} ERROR - ❌ Lima: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.958+0000] {climarisk_dag.py:194} ERROR - ❌ Bogotá: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.960+0000] {climarisk_dag.py:194} ERROR - ❌ Santiago: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.963+0000] {climarisk_dag.py:194} ERROR - ❌ Port-au-Prince: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.966+0000] {climarisk_dag.py:194} ERROR - ❌ San Juan: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.968+0000] {climarisk_dag.py:194} ERROR - ❌ Kingston: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.971+0000] {climarisk_dag.py:194} ERROR - ❌ Port of Spain: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.974+0000] {climarisk_dag.py:194} ERROR - ❌ Sydney: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.977+0000] {climarisk_dag.py:194} ERROR - ❌ Melbourne: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.980+0000] {climarisk_dag.py:194} ERROR - ❌ Brisbane: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.983+0000] {climarisk_dag.py:194} ERROR - ❌ Darwin: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.987+0000] {climarisk_dag.py:194} ERROR - ❌ Alice Springs: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.990+0000] {climarisk_dag.py:194} ERROR - ❌ Cairns: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.992+0000] {climarisk_dag.py:194} ERROR - ❌ Auckland: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.995+0000] {climarisk_dag.py:194} ERROR - ❌ Port Moresby: 404 Client Error: Not Found for url: http://backend:8000/api/predict/flood/
+[2026-03-23T22:08:30.995+0000] {climarisk_dag.py:201} INFO - ✅ Done: 0 OK, 291 errors, 1.0s
+[2026-03-23T22:08:31.015+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-23T22:08:31.016+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/climarisk_dag.py", line 210, in predict_all_zones
+    raise Exception(f"{errors} zone(s) failed — check logs above")
+Exception: 291 zone(s) failed — check logs above
+[2026-03-23T22:08:31.036+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=***_predictions, task_id=predict_all_zones, run_id=scheduled__2026-03-23T22:05:00+00:00, execution_date=20260323T220500, start_date=20260323T220829, end_date=20260323T220831
+[2026-03-23T22:08:31.051+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 249 for task predict_all_zones (291 zone(s) failed — check logs above; 6306)
+[2026-03-23T22:08:31.092+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-23T22:08:31.124+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-03-23T22:08:31.127+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

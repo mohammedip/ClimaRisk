@@ -1,7 +1,35 @@
-version: "3.9"
+
+x-airflow-common: &airflow-common
+  build:
+    context: ./airflow
+    dockerfile: Dockerfile
+  environment:
+    AIRFLOW__CORE__EXECUTOR:                    LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN:        postgresql+psycopg2://climarisk:climarisk@postgres:5432/climarisk_airflow
+    AIRFLOW__CORE__FERNET_KEY:                  ""
+    AIRFLOW__WEBSERVER__SECRET_KEY:             "secret-key"
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"
+    AIRFLOW__CORE__LOAD_EXAMPLES:               "false"
+    AIRFLOW__API__AUTH_BACKENDS:                airflow.api.auth.backend.basic_auth
+    PROMETHEUS_PUSHGATEWAY_URL:                 http://pushgateway:9091
+    POSTGRES_HOST:                              postgres
+    POSTGRES_PORT:                              "5432"
+    POSTGRES_USER:                              climarisk
+    POSTGRES_PASSWORD:                          climarisk
+    PYTHONPATH:                                 /app
+  volumes:
+    - ./airflow/dags:/opt/airflow/dags
+    - ./airflow/logs:/opt/airflow/logs
+    - ./backend:/app
+    - ./data:/app/data
+  depends_on:
+    postgres:
+      condition: service_healthy
+
 
 services:
 
+  # ── Database ────────────────────────────────────────────────────────────────
   postgres:
     image: postgis/postgis:16-3.4-alpine
     container_name: climarisk_postgres
@@ -21,6 +49,7 @@ services:
       retries: 20
       start_period: 60s
 
+  # ── Backend ──────────────────────────────────────────────────────────────────
   backend:
     build: ./backend
     container_name: climarisk_backend
@@ -37,14 +66,17 @@ services:
         condition: service_healthy
       ollama:
         condition: service_started
+      mlflow:
+        condition: service_healthy
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
               count: all
-              capabilities: [gpu]    
+              capabilities: [gpu]
 
+  # ── Frontend ──────────────────────────────────────────────────────────────────
   frontend:
     build: ./frontend
     container_name: climarisk_frontend
@@ -57,6 +89,7 @@ services:
     depends_on:
       - backend
 
+  # ── Ollama ────────────────────────────────────────────────────────────────────
   ollama:
     image: ollama/ollama:latest
     container_name: climarisk_ollama
@@ -73,21 +106,124 @@ services:
               count: all
               capabilities: [gpu]
 
+  # ── MLflow ────────────────────────────────────────────────────────────────────
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.10.0
+    container_name: climarisk_mlflow
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow_data:/mlflow
+    command: >
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri sqlite:////mlflow/mlflow.db
+      --default-artifact-root /mlflow/artifacts
+      --allowed-hosts "mlflow,localhost,127.0.0.1,backend,*"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
 
+  postgres-init:
+    image: postgis/postgis:16-3.4-alpine
+    container_name: climarisk_postgres_init
+    restart: "no"
+    environment:
+      PGPASSWORD: climarisk
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: ["sh", "-c"]
+    command: >
+      "psql -h postgres -U climarisk -d postgres
+      -c 'CREATE DATABASE climarisk_airflow OWNER climarisk' || true"
+
+
+  airflow:
+    <<: *airflow-common
+    container_name: climarisk_airflow
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+    command: bash -c "airflow db init && airflow users create --username admin --password climarisk --firstname ClimaRisk --lastname Admin --role Admin --email admin@climarisk.com 2>/dev/null || true && airflow scheduler & airflow webserver"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      postgres-init:
+        condition: service_completed_successfully  
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # ── Prometheus ────────────────────────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: climarisk_prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=30d"
+      - "--web.enable-lifecycle"
+    depends_on:
+      - backend
+
+  # ── Prometheus Pushgateway ────────────────────────────────────────────────────
+  # Allows Airflow batch jobs to push metrics to Prometheus
+  pushgateway:
+    image: prom/pushgateway:v1.8.0
+    container_name: climarisk_pushgateway
+    restart: unless-stopped
+    ports:
+      - "9091:9091"
+
+  # ── Grafana ───────────────────────────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:10.4.0
+    container_name: climarisk_grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER:     admin
+      GF_SECURITY_ADMIN_PASSWORD: climarisk
+      GF_USERS_ALLOW_SIGN_UP:     "false"
+      GF_INSTALL_PLUGINS:         grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+
+  # ── Adminer ───────────────────────────────────────────────────────────────────
   adminer:
     image: adminer:latest
     container_name: climarisk_adminer
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "8081:8080"
     depends_on:
       postgres:
         condition: service_healthy
 
 volumes:
-  postgres_data:
-    driver: local
-  ollama_data:
-    driver: local
-  chroma_data:
-    driver: local
+  postgres_data:    { driver: local }
+  ollama_data:      { driver: local }
+  chroma_data:      { driver: local }
+  mlflow_data:      { driver: local }
+  prometheus_data:  { driver: local }
+  grafana_data:     { driver: local }

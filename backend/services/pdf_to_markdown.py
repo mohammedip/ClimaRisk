@@ -9,7 +9,7 @@ MARKDOWN_DIR = Path("/app/data/markdown")
 def convert_pdf(pdf_path: Path) -> Path:
     print(f"📄 Converting: {pdf_path.relative_to(DOCS_DIR)}")
     md_text  = pymupdf4llm.to_markdown(str(pdf_path))
-    # Prefix with subfolder name to avoid name conflicts (e.g. fire__ed6230.md)
+
     subfolder = pdf_path.parent.name if pdf_path.parent != DOCS_DIR else ""
     stem      = f"{subfolder}__{pdf_path.stem}" if subfolder else pdf_path.stem
     out_path  = MARKDOWN_DIR / (stem + ".md")

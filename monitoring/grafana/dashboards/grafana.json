@@ -1,0 +1,86 @@
+{
+  "title": "ClimaRisk - Fixed Monitoring",
+  "uid": "climarisk-main-fixed",
+  "version": 2,
+  "schemaVersion": 38,
+  "refresh": "30s",
+  "time": { "from": "now-1h", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "title": "HTTP Request Rate (req/s)",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "targets": [{
+        "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+        "expr": "sum by (method, handler, status) (rate(http_requests_total[1m]))",
+        "legendFormat": "{{method}} {{handler}} {{status}}"
+      }]
+    },
+    {
+      "id": 2,
+      "title": "Request Duration p95 (s)",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "targets": [{
+        "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+        "expr": "histogram_quantile(0.95, sum by (le, handler) (rate(http_request_duration_seconds_bucket[5m])))",
+        "legendFormat": "p95 {{handler}}"
+      }],
+      "fieldConfig": { "defaults": { "unit": "s" } }
+    },
+    {
+      "id": 4,
+      "title": "DAG - Zone Errors (Total)",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 5 },
+      "targets": [{
+        "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+        "expr": "climarisk_dag_zone_errors_total",
+        "legendFormat": "Total Errors"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": 0 }, { "color": "red", "value": 1 }] }
+        }
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" }
+    },
+    {
+      "id": 7,
+      "title": "Backend - Memory (Resident)",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 13, "w": 12, "h": 8 },
+      "targets": [{
+        "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+        "expr": "process_resident_memory_bytes",
+        "legendFormat": "RSS Memory"
+      }],
+      "fieldConfig": { "defaults": { "unit": "bytes" } }
+    },
+    {
+      "id": 8,
+      "title": "Backend - CPU Usage %",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 13, "w": 12, "h": 8 },
+      "targets": [{
+        "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+        "expr": "rate(process_cpu_seconds_total[1m]) * 100",
+        "legendFormat": "CPU %"
+      }],
+      "fieldConfig": { "defaults": { "unit": "percent" } }
+    },
+    {
+      "id": 11,
+      "title": "HTTP Errors Rate (Non-2xx)",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 21, "w": 24, "h": 8 },
+      "targets": [{
+        "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+        "expr": "rate(http_requests_total{status!~\"2xx\"}[5m])",
+        "legendFormat": "{{status}} {{handler}}"
+      }]
+    }
+  ]
+}

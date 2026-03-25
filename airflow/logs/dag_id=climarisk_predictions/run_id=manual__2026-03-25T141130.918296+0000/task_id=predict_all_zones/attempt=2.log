@@ -1,0 +1,330 @@
+[2026-03-25T14:17:27.397+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-03-25T14:17:27.428+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: climarisk_predictions.predict_all_zones manual__2026-03-25T14:11:30.918296+00:00 [queued]>
+[2026-03-25T14:17:27.435+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: climarisk_predictions.predict_all_zones manual__2026-03-25T14:11:30.918296+00:00 [queued]>
+[2026-03-25T14:17:27.437+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2026-03-25T14:17:27.447+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): predict_all_zones> on 2026-03-25 14:11:30.918296+00:00
+[2026-03-25T14:17:27.454+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=766) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-03-25T14:17:27.455+0000] {standard_task_runner.py:63} INFO - Started process 767 to run task
+[2026-03-25T14:17:27.454+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', '***_predictions', 'predict_all_zones', 'manual__2026-03-25T14:11:30.918296+00:00', '--job-id', '490', '--raw', '--subdir', 'DAGS_FOLDER/***_dag.py', '--cfg-path', '/tmp/tmprpsib4fb']
+[2026-03-25T14:17:27.456+0000] {standard_task_runner.py:91} INFO - Job 490: Subtask predict_all_zones
+[2026-03-25T14:17:27.527+0000] {task_command.py:426} INFO - Running <TaskInstance: climarisk_predictions.predict_all_zones manual__2026-03-25T14:11:30.918296+00:00 [running]> on host 6146f0e8983c
+[2026-03-25T14:17:27.626+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='***_predictions' AIRFLOW_CTX_TASK_ID='predict_all_zones' AIRFLOW_CTX_EXECUTION_DATE='2026-03-25T14:11:30.918296+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-25T14:11:30.918296+00:00'
+[2026-03-25T14:17:27.627+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-03-25T14:17:28.197+0000] {climarisk_dag.py:153} ERROR - ❌ Alger: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:28.572+0000] {climarisk_dag.py:153} ERROR - ❌ Cairo: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:28.859+0000] {climarisk_dag.py:153} ERROR - ❌ Lagos: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:29.148+0000] {climarisk_dag.py:153} ERROR - ❌ Kano: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:29.496+0000] {climarisk_dag.py:153} ERROR - ❌ Abuja: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:29.797+0000] {climarisk_dag.py:153} ERROR - ❌ Johannesburg: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:30.082+0000] {climarisk_dag.py:153} ERROR - ❌ Cape Town: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:30.396+0000] {climarisk_dag.py:153} ERROR - ❌ Nairobi: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:30.756+0000] {climarisk_dag.py:153} ERROR - ❌ Addis Ababa: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:31.050+0000] {climarisk_dag.py:153} ERROR - ❌ Dar es Salaam: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:31.340+0000] {climarisk_dag.py:153} ERROR - ❌ Accra: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:31.652+0000] {climarisk_dag.py:153} ERROR - ❌ Casablanca: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:31.964+0000] {climarisk_dag.py:153} ERROR - ❌ Mohammedia: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:32.289+0000] {climarisk_dag.py:153} ERROR - ❌ El Jadida: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:32.643+0000] {climarisk_dag.py:153} ERROR - ❌ Settat: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:33.057+0000] {climarisk_dag.py:153} ERROR - ❌ Berrechid: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:33.395+0000] {climarisk_dag.py:153} ERROR - ❌ Benslimane: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:33.689+0000] {climarisk_dag.py:153} ERROR - ❌ Sidi Bennour: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:33.981+0000] {climarisk_dag.py:153} ERROR - ❌ Azemmour: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:34.365+0000] {climarisk_dag.py:153} ERROR - ❌ Mediouna: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:34.705+0000] {climarisk_dag.py:153} ERROR - ❌ Nouaceur: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:35.029+0000] {climarisk_dag.py:153} ERROR - ❌ Rabat: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:35.376+0000] {climarisk_dag.py:153} ERROR - ❌ Salé: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:35.741+0000] {climarisk_dag.py:153} ERROR - ❌ Kénitra: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:36.105+0000] {climarisk_dag.py:153} ERROR - ❌ Témara: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:36.422+0000] {climarisk_dag.py:153} ERROR - ❌ Skhirat: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:36.772+0000] {climarisk_dag.py:153} ERROR - ❌ Tiflet: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:37.105+0000] {climarisk_dag.py:153} ERROR - ❌ Khémisset: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:37.459+0000] {climarisk_dag.py:153} ERROR - ❌ Sidi Slimane: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:37.761+0000] {climarisk_dag.py:153} ERROR - ❌ Sidi Kacem: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:38.094+0000] {climarisk_dag.py:153} ERROR - ❌ Souk el Arba: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:38.381+0000] {climarisk_dag.py:153} ERROR - ❌ Ouazzane: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:38.719+0000] {climarisk_dag.py:153} ERROR - ❌ Fès: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:39.048+0000] {climarisk_dag.py:153} ERROR - ❌ Meknès: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:39.361+0000] {climarisk_dag.py:153} ERROR - ❌ Ifrane: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:39.671+0000] {climarisk_dag.py:153} ERROR - ❌ Azrou: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:39.997+0000] {climarisk_dag.py:153} ERROR - ❌ Taounate: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:40.370+0000] {climarisk_dag.py:153} ERROR - ❌ Taza: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:40.695+0000] {climarisk_dag.py:153} ERROR - ❌ Sefrou: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:41.050+0000] {climarisk_dag.py:153} ERROR - ❌ Boulemane: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:41.408+0000] {climarisk_dag.py:153} ERROR - ❌ El Hajeb: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:41.709+0000] {climarisk_dag.py:153} ERROR - ❌ Missour: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:42.019+0000] {climarisk_dag.py:153} ERROR - ❌ Guercif: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:42.352+0000] {climarisk_dag.py:153} ERROR - ❌ Marrakech: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:42.707+0000] {climarisk_dag.py:153} ERROR - ❌ Safi: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:43.973+0000] {climarisk_dag.py:153} ERROR - ❌ Essaouira: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:44.312+0000] {climarisk_dag.py:153} ERROR - ❌ El Kelaa des Sraghna: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:44.667+0000] {climarisk_dag.py:153} ERROR - ❌ Chichaoua: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:44.995+0000] {climarisk_dag.py:153} ERROR - ❌ Youssoufia: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:45.285+0000] {climarisk_dag.py:153} ERROR - ❌ Ben Guerir: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:45.578+0000] {climarisk_dag.py:153} ERROR - ❌ Tahanaout: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:45.889+0000] {climarisk_dag.py:153} ERROR - ❌ Ait Ourir: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:46.193+0000] {climarisk_dag.py:153} ERROR - ❌ Demnate: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:46.498+0000] {climarisk_dag.py:153} ERROR - ❌ Tanger: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:46.865+0000] {climarisk_dag.py:153} ERROR - ❌ Tétouan: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:47.225+0000] {climarisk_dag.py:153} ERROR - ❌ Al Hoceïma: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:47.604+0000] {climarisk_dag.py:153} ERROR - ❌ Larache: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:48.022+0000] {climarisk_dag.py:153} ERROR - ❌ Chefchaouen: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:48.372+0000] {climarisk_dag.py:153} ERROR - ❌ Asilah: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:48.703+0000] {climarisk_dag.py:153} ERROR - ❌ Fnideq: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:49.104+0000] {climarisk_dag.py:153} ERROR - ❌ Martil: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:49.495+0000] {climarisk_dag.py:153} ERROR - ❌ Mdiq: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:49.881+0000] {climarisk_dag.py:153} ERROR - ❌ Ksar el Kebir: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:50.309+0000] {climarisk_dag.py:153} ERROR - ❌ Ouazzane: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:50.684+0000] {climarisk_dag.py:153} ERROR - ❌ Targuist: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:51.070+0000] {climarisk_dag.py:153} ERROR - ❌ Imzouren: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:51.439+0000] {climarisk_dag.py:153} ERROR - ❌ Beni Mellal-Khenifra: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:51.794+0000] {climarisk_dag.py:153} ERROR - ❌ Khénifra: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:52.151+0000] {climarisk_dag.py:153} ERROR - ❌ Azilal: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:52.474+0000] {climarisk_dag.py:153} ERROR - ❌ Nanjing: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:52.893+0000] {climarisk_dag.py:153} ERROR - ❌ Khouribga: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:53.270+0000] {climarisk_dag.py:153} ERROR - ❌ Fkih Ben Salah: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:53.560+0000] {climarisk_dag.py:153} ERROR - ❌ Souk Sebt: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:53.902+0000] {climarisk_dag.py:153} ERROR - ❌ Midelt: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:54.234+0000] {climarisk_dag.py:153} ERROR - ❌ Zaouiat Cheikh: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:54.377+0000] {climarisk_dag.py:153} ERROR - ❌ Oujda: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:54.781+0000] {climarisk_dag.py:153} ERROR - ❌ Nador: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:55.128+0000] {climarisk_dag.py:153} ERROR - ❌ Berkane: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:55.448+0000] {climarisk_dag.py:153} ERROR - ❌ Taourirt: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:55.771+0000] {climarisk_dag.py:153} ERROR - ❌ Jerada: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:56.093+0000] {climarisk_dag.py:153} ERROR - ❌ Figuig: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:56.426+0000] {climarisk_dag.py:153} ERROR - ❌ Bouarfa: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:56.780+0000] {climarisk_dag.py:153} ERROR - ❌ Selouane: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:57.056+0000] {climarisk_dag.py:153} ERROR - ❌ Zaio: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:57.433+0000] {climarisk_dag.py:153} ERROR - ❌ Agadir: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:57.730+0000] {climarisk_dag.py:153} ERROR - ❌ Inezgane: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:58.012+0000] {climarisk_dag.py:153} ERROR - ❌ Tiznit: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:58.321+0000] {climarisk_dag.py:153} ERROR - ❌ Taroudannt: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:58.644+0000] {climarisk_dag.py:153} ERROR - ❌ Ouarzazate: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:59.032+0000] {climarisk_dag.py:153} ERROR - ❌ Ait Melloul: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:59.302+0000] {climarisk_dag.py:153} ERROR - ❌ Biougra: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:17:59.678+0000] {climarisk_dag.py:153} ERROR - ❌ Chtouka Ait Baha: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:00.029+0000] {climarisk_dag.py:153} ERROR - ❌ Tata: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:00.327+0000] {climarisk_dag.py:153} ERROR - ❌ Sidi Ifni: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:00.694+0000] {climarisk_dag.py:153} ERROR - ❌ Massa: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:01.076+0000] {climarisk_dag.py:153} ERROR - ❌ Errachidia: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:01.428+0000] {climarisk_dag.py:153} ERROR - ❌ Zagora: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:01.752+0000] {climarisk_dag.py:153} ERROR - ❌ Tinghir: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:02.107+0000] {climarisk_dag.py:153} ERROR - ❌ Ouarzazate: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:02.458+0000] {climarisk_dag.py:153} ERROR - ❌ Rissani: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:02.737+0000] {climarisk_dag.py:153} ERROR - ❌ Erfoud: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:03.101+0000] {climarisk_dag.py:153} ERROR - ❌ Merzouga: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:03.441+0000] {climarisk_dag.py:153} ERROR - ❌ Alnif: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:03.886+0000] {climarisk_dag.py:153} ERROR - ❌ Goulmima: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:04.205+0000] {climarisk_dag.py:153} ERROR - ❌ Laâyoune: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:04.511+0000] {climarisk_dag.py:153} ERROR - ❌ Boujdour: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:04.849+0000] {climarisk_dag.py:153} ERROR - ❌ Tarfaya: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:05.245+0000] {climarisk_dag.py:153} ERROR - ❌ Smara: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:05.540+0000] {climarisk_dag.py:153} ERROR - ❌ El Marsa: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:05.838+0000] {climarisk_dag.py:153} ERROR - ❌ Dakhla: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:06.172+0000] {climarisk_dag.py:153} ERROR - ❌ Aousserd: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:06.520+0000] {climarisk_dag.py:153} ERROR - ❌ Guelmim: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:06.887+0000] {climarisk_dag.py:153} ERROR - ❌ Tan-Tan: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:07.217+0000] {climarisk_dag.py:153} ERROR - ❌ Assa: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:07.500+0000] {climarisk_dag.py:153} ERROR - ❌ Zag: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:07.836+0000] {climarisk_dag.py:153} ERROR - ❌ Sidi Ifni: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:08.167+0000] {climarisk_dag.py:153} ERROR - ❌ Tiznit: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:08.469+0000] {climarisk_dag.py:153} ERROR - ❌ Tunis: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:08.806+0000] {climarisk_dag.py:153} ERROR - ❌ Kampala: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:09.193+0000] {climarisk_dag.py:153} ERROR - ❌ Dakar: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:09.525+0000] {climarisk_dag.py:153} ERROR - ❌ Kinshasa: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:09.808+0000] {climarisk_dag.py:153} ERROR - ❌ Luanda: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:10.170+0000] {climarisk_dag.py:153} ERROR - ❌ Khartoum: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:10.582+0000] {climarisk_dag.py:153} ERROR - ❌ Harare: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:10.941+0000] {climarisk_dag.py:153} ERROR - ❌ Lusaka: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:11.227+0000] {climarisk_dag.py:153} ERROR - ❌ Maputo: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:11.547+0000] {climarisk_dag.py:153} ERROR - ❌ Antananarivo: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:11.946+0000] {climarisk_dag.py:153} ERROR - ❌ Abidjan: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:12.250+0000] {climarisk_dag.py:153} ERROR - ❌ Douala: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:12.572+0000] {climarisk_dag.py:153} ERROR - ❌ Niamey: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:12.931+0000] {climarisk_dag.py:153} ERROR - ❌ Ouagadougou: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:13.330+0000] {climarisk_dag.py:153} ERROR - ❌ Bamako: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:14.630+0000] {climarisk_dag.py:153} ERROR - ❌ Windhoek: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:14.950+0000] {climarisk_dag.py:153} ERROR - ❌ Port Harcourt: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:15.347+0000] {climarisk_dag.py:153} ERROR - ❌ Warri: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:15.752+0000] {climarisk_dag.py:153} ERROR - ❌ Calabar: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:16.056+0000] {climarisk_dag.py:153} ERROR - ❌ Beijing: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:16.386+0000] {climarisk_dag.py:153} ERROR - ❌ Shanghai: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:16.742+0000] {climarisk_dag.py:153} ERROR - ❌ Guangzhou: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:17.131+0000] {climarisk_dag.py:153} ERROR - ❌ Chengdu: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:17.435+0000] {climarisk_dag.py:153} ERROR - ❌ Wuhan: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:17.797+0000] {climarisk_dag.py:153} ERROR - ❌ Chongqing: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:18.147+0000] {climarisk_dag.py:153} ERROR - ❌ Zhengzhou: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:18.495+0000] {climarisk_dag.py:153} ERROR - ❌ Changsha: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:18.854+0000] {climarisk_dag.py:153} ERROR - ❌ Nanchang: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:19.189+0000] {climarisk_dag.py:153} ERROR - ❌ Yichang: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:19.535+0000] {climarisk_dag.py:153} ERROR - ❌ Haikou: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:19.899+0000] {climarisk_dag.py:153} ERROR - ❌ Hong Kong: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:20.222+0000] {climarisk_dag.py:153} ERROR - ❌ Taipei: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:20.590+0000] {climarisk_dag.py:153} ERROR - ❌ Kaohsiung: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:20.882+0000] {climarisk_dag.py:153} ERROR - ❌ Mumbai: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:21.188+0000] {climarisk_dag.py:153} ERROR - ❌ Delhi: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:21.525+0000] {climarisk_dag.py:153} ERROR - ❌ Bangalore: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:21.812+0000] {climarisk_dag.py:153} ERROR - ❌ Chennai: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:22.172+0000] {climarisk_dag.py:153} ERROR - ❌ Kolkata: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:22.554+0000] {climarisk_dag.py:153} ERROR - ❌ Patna: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:22.932+0000] {climarisk_dag.py:153} ERROR - ❌ Guwahati: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:23.263+0000] {climarisk_dag.py:153} ERROR - ❌ Varanasi: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:23.564+0000] {climarisk_dag.py:153} ERROR - ❌ Muzaffarpur: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:23.868+0000] {climarisk_dag.py:153} ERROR - ❌ Visakhapatnam: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:24.164+0000] {climarisk_dag.py:153} ERROR - ❌ Vijayawada: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:24.329+0000] {climarisk_dag.py:153} ERROR - ❌ Tokyo: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:24.696+0000] {climarisk_dag.py:153} ERROR - ❌ Osaka: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:25.065+0000] {climarisk_dag.py:153} ERROR - ❌ Sapporo: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:25.380+0000] {climarisk_dag.py:153} ERROR - ❌ Naha: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:25.711+0000] {climarisk_dag.py:153} ERROR - ❌ Seoul: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:26.004+0000] {climarisk_dag.py:153} ERROR - ❌ Busan: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:26.332+0000] {climarisk_dag.py:153} ERROR - ❌ Bangkok: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:26.666+0000] {climarisk_dag.py:153} ERROR - ❌ Chiang Mai: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:26.982+0000] {climarisk_dag.py:153} ERROR - ❌ Jakarta: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:27.323+0000] {climarisk_dag.py:153} ERROR - ❌ Surabaya: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:27.670+0000] {climarisk_dag.py:153} ERROR - ❌ Medan: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:28.007+0000] {climarisk_dag.py:153} ERROR - ❌ Manila: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:28.377+0000] {climarisk_dag.py:153} ERROR - ❌ Cebu: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:28.788+0000] {climarisk_dag.py:153} ERROR - ❌ Tacloban: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:29.146+0000] {climarisk_dag.py:153} ERROR - ❌ Legazpi: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:29.478+0000] {climarisk_dag.py:153} ERROR - ❌ Zamboanga: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:29.861+0000] {climarisk_dag.py:153} ERROR - ❌ Kuala Lumpur: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:30.166+0000] {climarisk_dag.py:153} ERROR - ❌ Singapore: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:30.474+0000] {climarisk_dag.py:153} ERROR - ❌ Ho Chi Minh City: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:30.822+0000] {climarisk_dag.py:153} ERROR - ❌ Hanoi: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:31.148+0000] {climarisk_dag.py:153} ERROR - ❌ Da Nang: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:31.520+0000] {climarisk_dag.py:153} ERROR - ❌ Can Tho: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:31.864+0000] {climarisk_dag.py:153} ERROR - ❌ My Tho: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:32.183+0000] {climarisk_dag.py:153} ERROR - ❌ Dhaka: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:32.488+0000] {climarisk_dag.py:153} ERROR - ❌ Chittagong: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:32.891+0000] {climarisk_dag.py:153} ERROR - ❌ Sylhet: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:33.182+0000] {climarisk_dag.py:153} ERROR - ❌ Khulna: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:33.517+0000] {climarisk_dag.py:153} ERROR - ❌ Cox's Bazar: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:33.838+0000] {climarisk_dag.py:153} ERROR - ❌ Karachi: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:34.157+0000] {climarisk_dag.py:153} ERROR - ❌ Lahore: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:34.541+0000] {climarisk_dag.py:153} ERROR - ❌ Colombo: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:34.973+0000] {climarisk_dag.py:153} ERROR - ❌ Kathmandu: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:35.367+0000] {climarisk_dag.py:153} ERROR - ❌ Yangon: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:35.772+0000] {climarisk_dag.py:153} ERROR - ❌ Sittwe: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:36.134+0000] {climarisk_dag.py:153} ERROR - ❌ Phnom Penh: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:36.483+0000] {climarisk_dag.py:153} ERROR - ❌ Riyadh: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:36.794+0000] {climarisk_dag.py:153} ERROR - ❌ Dubai: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:37.110+0000] {climarisk_dag.py:153} ERROR - ❌ Tehran: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:37.476+0000] {climarisk_dag.py:153} ERROR - ❌ Istanbul: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:37.838+0000] {climarisk_dag.py:153} ERROR - ❌ Ankara: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:38.235+0000] {climarisk_dag.py:153} ERROR - ❌ Baghdad: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:38.590+0000] {climarisk_dag.py:153} ERROR - ❌ Baku: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:38.944+0000] {climarisk_dag.py:153} ERROR - ❌ Tashkent: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:39.308+0000] {climarisk_dag.py:153} ERROR - ❌ Almaty: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:39.701+0000] {climarisk_dag.py:153} ERROR - ❌ Guam: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:40.053+0000] {climarisk_dag.py:153} ERROR - ❌ Paris: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:40.441+0000] {climarisk_dag.py:153} ERROR - ❌ Lyon: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:40.758+0000] {climarisk_dag.py:153} ERROR - ❌ Marseille: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:41.152+0000] {climarisk_dag.py:153} ERROR - ❌ Toulouse: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:41.512+0000] {climarisk_dag.py:153} ERROR - ❌ Bordeaux: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:41.878+0000] {climarisk_dag.py:153} ERROR - ❌ Nantes: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:42.272+0000] {climarisk_dag.py:153} ERROR - ❌ Strasbourg: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:42.612+0000] {climarisk_dag.py:153} ERROR - ❌ Lille: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:42.973+0000] {climarisk_dag.py:153} ERROR - ❌ Montpellier: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:43.327+0000] {climarisk_dag.py:153} ERROR - ❌ Nice: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:43.690+0000] {climarisk_dag.py:153} ERROR - ❌ London: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:44.052+0000] {climarisk_dag.py:153} ERROR - ❌ Birmingham: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:44.416+0000] {climarisk_dag.py:153} ERROR - ❌ Manchester: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:45.637+0000] {climarisk_dag.py:153} ERROR - ❌ Berlin: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:45.983+0000] {climarisk_dag.py:153} ERROR - ❌ Hamburg: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:46.322+0000] {climarisk_dag.py:153} ERROR - ❌ Munich: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:46.670+0000] {climarisk_dag.py:153} ERROR - ❌ Frankfurt: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:47.083+0000] {climarisk_dag.py:153} ERROR - ❌ Madrid: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:47.506+0000] {climarisk_dag.py:153} ERROR - ❌ Barcelona: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:47.929+0000] {climarisk_dag.py:153} ERROR - ❌ Valencia: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:48.357+0000] {climarisk_dag.py:153} ERROR - ❌ Malaga: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:48.763+0000] {climarisk_dag.py:153} ERROR - ❌ Rome: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:49.098+0000] {climarisk_dag.py:153} ERROR - ❌ Milan: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:49.386+0000] {climarisk_dag.py:153} ERROR - ❌ Palermo: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:49.857+0000] {climarisk_dag.py:153} ERROR - ❌ Amsterdam: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:50.263+0000] {climarisk_dag.py:153} ERROR - ❌ Brussels: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:50.558+0000] {climarisk_dag.py:153} ERROR - ❌ Vienna: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:50.890+0000] {climarisk_dag.py:153} ERROR - ❌ Zurich: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:51.234+0000] {climarisk_dag.py:153} ERROR - ❌ Stockholm: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:51.592+0000] {climarisk_dag.py:153} ERROR - ❌ Oslo: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:51.947+0000] {climarisk_dag.py:153} ERROR - ❌ Copenhagen: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:52.255+0000] {climarisk_dag.py:153} ERROR - ❌ Helsinki: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:52.605+0000] {climarisk_dag.py:153} ERROR - ❌ Warsaw: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:52.904+0000] {climarisk_dag.py:153} ERROR - ❌ Prague: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:53.235+0000] {climarisk_dag.py:153} ERROR - ❌ Budapest: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:53.592+0000] {climarisk_dag.py:153} ERROR - ❌ Bucharest: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:53.939+0000] {climarisk_dag.py:153} ERROR - ❌ Athens: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:54.151+0000] {climarisk_dag.py:153} ERROR - ❌ Thessaloniki: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:54.472+0000] {climarisk_dag.py:153} ERROR - ❌ Lisbon: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:54.763+0000] {climarisk_dag.py:153} ERROR - ❌ Moscow: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:55.117+0000] {climarisk_dag.py:153} ERROR - ❌ Saint Petersburg: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:55.399+0000] {climarisk_dag.py:153} ERROR - ❌ Krasnoyarsk: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:55.748+0000] {climarisk_dag.py:153} ERROR - ❌ Irkutsk: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:56.029+0000] {climarisk_dag.py:153} ERROR - ❌ Yakutsk: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:56.374+0000] {climarisk_dag.py:153} ERROR - ❌ Khabarovsk: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:56.706+0000] {climarisk_dag.py:153} ERROR - ❌ Kyiv: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:56.980+0000] {climarisk_dag.py:153} ERROR - ❌ New York: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:57.283+0000] {climarisk_dag.py:153} ERROR - ❌ Los Angeles: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:57.627+0000] {climarisk_dag.py:153} ERROR - ❌ Chicago: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:57.969+0000] {climarisk_dag.py:153} ERROR - ❌ Houston: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:58.318+0000] {climarisk_dag.py:153} ERROR - ❌ Miami: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:58.648+0000] {climarisk_dag.py:153} ERROR - ❌ New Orleans: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:58.943+0000] {climarisk_dag.py:153} ERROR - ❌ Seattle: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:59.250+0000] {climarisk_dag.py:153} ERROR - ❌ Sacramento: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:59.601+0000] {climarisk_dag.py:153} ERROR - ❌ Fresno: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:18:59.925+0000] {climarisk_dag.py:153} ERROR - ❌ Redding: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:00.269+0000] {climarisk_dag.py:153} ERROR - ❌ Memphis: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:00.631+0000] {climarisk_dag.py:153} ERROR - ❌ Toronto: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:01.031+0000] {climarisk_dag.py:153} ERROR - ❌ Montreal: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:01.403+0000] {climarisk_dag.py:153} ERROR - ❌ Vancouver: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:01.767+0000] {climarisk_dag.py:153} ERROR - ❌ Mexico City: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:02.087+0000] {climarisk_dag.py:153} ERROR - ❌ Veracruz: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:02.392+0000] {climarisk_dag.py:153} ERROR - ❌ Cancún: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:02.706+0000] {climarisk_dag.py:153} ERROR - ❌ São Paulo: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:02.990+0000] {climarisk_dag.py:153} ERROR - ❌ Rio de Janeiro: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:03.270+0000] {climarisk_dag.py:153} ERROR - ❌ Belém: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:03.556+0000] {climarisk_dag.py:153} ERROR - ❌ Marabá: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:03.902+0000] {climarisk_dag.py:153} ERROR - ❌ Sinop: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:04.259+0000] {climarisk_dag.py:153} ERROR - ❌ Porto Velho: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:04.638+0000] {climarisk_dag.py:153} ERROR - ❌ Buenos Aires: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:04.988+0000] {climarisk_dag.py:153} ERROR - ❌ Lima: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:05.317+0000] {climarisk_dag.py:153} ERROR - ❌ Bogotá: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:05.622+0000] {climarisk_dag.py:153} ERROR - ❌ Santiago: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:05.971+0000] {climarisk_dag.py:153} ERROR - ❌ Port-au-Prince: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:06.284+0000] {climarisk_dag.py:153} ERROR - ❌ San Juan: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:06.640+0000] {climarisk_dag.py:153} ERROR - ❌ Kingston: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:06.992+0000] {climarisk_dag.py:153} ERROR - ❌ Port of Spain: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:07.352+0000] {climarisk_dag.py:153} ERROR - ❌ Sydney: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:07.684+0000] {climarisk_dag.py:153} ERROR - ❌ Melbourne: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:08.001+0000] {climarisk_dag.py:153} ERROR - ❌ Brisbane: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:08.319+0000] {climarisk_dag.py:153} ERROR - ❌ Darwin: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:08.651+0000] {climarisk_dag.py:153} ERROR - ❌ Alice Springs: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:08.971+0000] {climarisk_dag.py:153} ERROR - ❌ Cairns: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:09.311+0000] {climarisk_dag.py:153} ERROR - ❌ Auckland: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:09.644+0000] {climarisk_dag.py:153} ERROR - ❌ Port Moresby: 500 Server Error: Internal Server Error for url: http://backend:8000/api/predictions/flood
+[2026-03-25T14:19:09.644+0000] {climarisk_dag.py:157} INFO - ✅ Done: 0 OK, 291 errors, 101.8s
+[2026-03-25T14:19:09.664+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-03-25T14:19:09.665+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/climarisk_dag.py", line 166, in predict_all_zones
+    raise Exception(f"{errors} zone(s) failed — check logs above")
+Exception: 291 zone(s) failed — check logs above
+[2026-03-25T14:19:09.679+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=***_predictions, task_id=predict_all_zones, run_id=manual__2026-03-25T14:11:30.918296+00:00, execution_date=20260325T141130, start_date=20260325T141727, end_date=20260325T141909
+[2026-03-25T14:19:09.691+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 490 for task predict_all_zones (291 zone(s) failed — check logs above; 767)
+[2026-03-25T14:19:09.729+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-03-25T14:19:09.750+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-03-25T14:19:09.753+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

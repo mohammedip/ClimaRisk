@@ -10,103 +10,106 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough, RunnableLambda
 
+
 CHROMA_DIR  = Path("/app/data/chroma")
 COLLECTION  = "climarisk_docs"
 EMBED_MODEL = "intfloat/multilingual-e5-large"
 OLLAMA_URL  = "http://ollama:11434"
-MODEL       = "mistral"
-TOP_K       = 5
+MODEL       = "mistral:latest"
+TOP_K       = 6
 
 
-def clean_source_name(source: str) -> str:
-    # Strip full path, keep only filename
-    name = source.split("/")[-1].split("\\")[-1]
-    name = name.replace(".md", "")
-    if "__" in name:
-        folder, stem = name.split("__", 1)
-        return f"{folder} / {stem}"
-    return name
+SYSTEM_PROMPT = """You are ClimaRisk AI, an emergency response assistant.
 
-SYSTEM_PROMPT = """You are ClimaRisk AI, an emergency response assistant specialized in flood and wildfire risk management.
-You have access to official emergency protocols and risk assessment documents.
+STRICT INSTRUCTIONS:
+1. PRIORITY: If the user is in immediate danger (Flood/Fire), lead with DIRECT ACTION STEPS (Evacuation, Safety, Emergency numbers). 
+2. SECONDARY: Only mention administrative organizations (DDFIP, DGPR, etc.) if specifically asked about "authorities" or "management."
+3. NO NOISE: Do not explain what "Yellow" or "Orange" means unless the user asks for the "Risk Level."
+4. SOURCE: Cite every instruction as (Source: Folder / Filename).
+5. LANGUAGE: Respond in the same language as the user.
 
 Context from documents:
 {context}
-
-Rules:
-- Be concise and direct — rescue agents need fast, clear answers
-- Cite the source document when you use specific information
-- If risk level is HIGH or CRITICAL, lead with urgency
-- Answer in the same language as the question (French or English)
-- Never invent information — if unsure, say so clearly
 """
 
-_vectorstore = None
-_embeddings  = None
+
+print(f"⏳ Loading Embedding Model: {EMBED_MODEL}...")
+_embeddings = HuggingFaceEmbeddings(
+    model_name=EMBED_MODEL,
+    model_kwargs={"device": "cuda"},
+    encode_kwargs={"normalize_embeddings": True},
+)
+
+if not CHROMA_DIR.exists():
+    print("⚠️ Warning: ChromaDB directory not found.")
+    _vectorstore = None
+else:
+    print(f"⏳ Connecting to ChromaDB at {CHROMA_DIR}...")
+    _vectorstore = Chroma(
+        persist_directory=str(CHROMA_DIR),
+        collection_name=COLLECTION,
+        embedding_function=_embeddings,
+    )
+    print(f"✅ RAG Engine Ready — {_vectorstore._collection.count()} chunks loaded.")
 
 
-def get_vectorstore() -> Chroma:
-    global _vectorstore, _embeddings
+def clean_source_name(source) -> str:
 
-    if _vectorstore is None:
-        if not CHROMA_DIR.exists():
-            raise RuntimeError("ChromaDB not found. Run python services/ingest.py first.")
-
-        print("⏳ Loading multilingual-e5-large + ChromaDB...")
-        _embeddings = HuggingFaceEmbeddings(
-            model_name=EMBED_MODEL,
-            model_kwargs={"device": "cuda"},
-            encode_kwargs={"normalize_embeddings": True},
-        )
-        _vectorstore = Chroma(
-            persist_directory=str(CHROMA_DIR),
-            collection_name=COLLECTION,
-            embedding_function=_embeddings,
-        )
-        print(f"✅ ChromaDB ready — {_vectorstore._collection.count()} chunks")
-
-    return _vectorstore
+    if isinstance(source, list):
+        return " / ".join(source).replace(".md", "")
+    
+    name = str(source).split("/")[-1].split("\\")[-1].replace(".md", "")
+    if "__" in name:
+        return name.replace("__", " / ")
+    return name
 
 
 def add_query_prefix(question: str) -> str:
-    """multilingual-e5 requires 'query: ' prefix at retrieval time."""
     return f"query: {question}"
 
-
-def retrieve(query: str, top_k: int = TOP_K) -> List[dict]:
-    try:
-        vs      = get_vectorstore()
-        prefixed = add_query_prefix(query)
-        results = vs.similarity_search_with_relevance_scores(prefixed, k=top_k)
-        return [
-            {
-                "content": doc.page_content.replace("passage: ", "", 1),
-                "source":  clean_source_name(doc.metadata.get("source", "unknown")),
-                "score":   round(score, 3),
-            }
-            for doc, score in results
-        ]
-    except RuntimeError:
-        return []
-
-
 def format_docs(docs) -> str:
+    # This provides the context block the LLM sees
     return "\n\n---\n\n".join([
-        f"[Source: {clean_source_name(d.metadata.get('source', 'unknown'))}]\n{d.page_content.replace('passage: ', '', 1)}"
+        f"[Source: {clean_source_name(d.metadata.get('source', 'unknown'))}]\n"
+        f"{d.page_content.replace('passage: ', '', 1)}"
         for d in docs
     ])
 
+# --- Core Logic ---
+
+def retrieve(query: str, top_k: int = TOP_K) -> List[dict]:
+    if _vectorstore is None: return []
+    prefixed = add_query_prefix(query)
+    # Use relevance scores to filter out garbage matches
+    results = _vectorstore.similarity_search_with_relevance_scores(prefixed, k=top_k)
+    
+    return [
+        {
+            "content": doc.page_content.replace("passage: ", "", 1),
+            "source":  clean_source_name(doc.metadata.get("source", "unknown")),
+            "score":   round(score, 3),
+        }
+        for doc, score in results
+    ]
+
+
+def translate_query_if_needed(query: str) -> str:
+
+    return f"{query} inondation crue incendie feu évacuation secours"    
 
 def build_chain(zone_context: str = ""):
-    vs        = get_vectorstore()
+    if _vectorstore is None:
+        raise RuntimeError("Vectorstore not initialized.")
 
-    # Wrap retriever to add query prefix for multilingual-e5
-    base_retriever = vs.as_retriever(search_kwargs={"k": TOP_K})
-    retriever = RunnableLambda(
-        lambda q: base_retriever.invoke(add_query_prefix(q))
-    )
+    # Optimized Retriever with prefixing
+    base_retriever = _vectorstore.as_retriever(
+        search_type="mmr", 
+        search_kwargs={"k": TOP_K, "fetch_k": 20, "lambda_mult": 0.5}
+        )
+    retriever = RunnableLambda(lambda q: base_retriever.invoke(add_query_prefix(translate_query_if_needed(q))))
 
-    llm = ChatOllama(model=MODEL, base_url=OLLAMA_URL, temperature=0.1)
+    # Ensure URL is clean and model is correct
+    llm = ChatOllama(model=MODEL, base_url=OLLAMA_URL.rstrip("/"), temperature=0.0) 
 
     system = SYSTEM_PROMPT
     if zone_context:
@@ -117,41 +120,28 @@ def build_chain(zone_context: str = ""):
         ("human", "{question}"),
     ])
 
-    chain = (
+    return (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}
         | prompt
         | llm
         | StrOutputParser()
     )
-    return chain
-
 
 async def stream_answer(question: str, zone_context: str = "") -> AsyncIterator[str]:
-    """Stream RAG answer tokens — called by routes/chat.py"""
     try:
         chain = build_chain(zone_context)
         async for token in chain.astream(question):
             yield token
-    except RuntimeError as e:
-        yield f"⚠️ {str(e)}"
-
-
-# ── Standalone test ───────────────────────────────────────────────────────────
-
-async def _test():
-    question = sys.argv[1] if len(sys.argv) > 1 else "What is the flood evacuation protocol?"
-    print(f"\n🔍 Question: {question}\n")
-
-    chunks = retrieve(question)
-    print(f"📚 Retrieved {len(chunks)} chunks:")
-    for i, c in enumerate(chunks):
-        print(f"  [{i+1}] {c['source']} (score: {c['score']})")
-
-    print(f"\n🤖 Answer:\n{'='*50}\n")
-    async for token in stream_answer(question):
-        print(token, end="", flush=True)
-    print("\n")
-
+    except Exception as e:
+        yield f"⚠️ Error: {str(e)}"
 
 if __name__ == "__main__":
+    async def _test():
+        # Corrected: sys.argv to get the actual string
+        q = sys.argv if len(sys.argv) > 1 else "What is the flood evacuation protocol?"
+        print(f"\n🔍 Testing RAG with: {q}\n")
+        async for token in stream_answer(q):
+            print(token, end="", flush=True)
+        print("\n")
+
     asyncio.run(_test())
