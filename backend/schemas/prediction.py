@@ -43,7 +43,19 @@ class FloodPredictionResponse(BaseModel):
 
     model_config = {"from_attributes": True}
 
+class FloodSimulationRequest(BaseModel):
+    precip_1d:      float = 25.0
+    precip_3d:      float = 60.0
+    elevation:      float = 50.0
+    TWI:            float = 4.0
+    slope:          float = 6.0
+    upstream_area:  float = 1.0
+    NDVI:           float = 0.5
+    NDWI:           float = -0.2
+    jrc_perm_water: float = 0.0
+    landcover:      float = 40.0
 
+    
 # ── Fire ──────────────────────────────────────────────────────────────────────
 
 class FirePredictionRequest(BaseModel):

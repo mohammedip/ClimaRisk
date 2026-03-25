@@ -40,7 +40,7 @@ dag = DAG(
     dag_id="climarisk_predictions",
     description="Fetch weather + run flood/fire predictions for all active zones",
     default_args=default_args,
-    schedule_interval="*/30 * * * *",
+    schedule_interval="0 */5 * * *",
     start_date=datetime(2024, 1, 1, tzinfo=timezone.utc),
     catchup=False,
     max_active_runs=1,

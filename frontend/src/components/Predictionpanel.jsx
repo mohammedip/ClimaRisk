@@ -8,8 +8,6 @@ const RISK_CONFIG = {
   CRITICAL: { color: "#7c3aed", bg: "rgba(124,58,237,0.08)",  border: "rgba(124,58,237,0.25)"  },
 };
 
-// Thresholds match backend schemas/prediction.py exactly:
-// >= 50% = CRITICAL, >= 30% = HIGH, >= 10% = MEDIUM, < 10% = LOW
 const ZONE_THRESHOLDS = [
   { label: "LOW",      color: "#22c55e", from: 0,  to: 30  },
   { label: "MEDIUM",   color: "#f59e0b", from: 30, to: 70  },
@@ -43,8 +41,11 @@ const CSS = `
   .pp-select:focus { outline:none; border-color:rgba(0,200,255,0.35); }
   .pp-grid        { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; }
   .pp-field-lbl   { font-size:9px; color:#4a6280; letter-spacing:1px; margin-bottom:3px; }
-  .pp-input       { width:100%; background:#060a0f; border:1px solid rgba(255,255,255,0.06); border-radius:6px; color:#94a3b8; padding:6px 10px; font-size:11px; font-family:'DM Sans',sans-serif; transition:border-color 0.2s; }
+  .pp-field-hint  { font-size:8px; color:#2a3a4a; letter-spacing:0.5px; margin-bottom:3px; }
+  .pp-input       { width:100%; background:#060a0f; border:1px solid rgba(255,255,255,0.06); border-radius:6px; color:#94a3b8; padding:6px 10px; font-size:11px; font-family:'DM Sans',sans-serif; transition:border-color 0.2s; box-sizing:border-box; }
   .pp-input:focus { outline:none; border-color:rgba(0,200,255,0.3); color:#f1f5f9; }
+  .pp-divider     { height:1px; background:rgba(255,255,255,0.04); margin:10px 0; }
+  .pp-defaults    { font-size:9px; color:#2a3a4a; letter-spacing:0.8px; margin-bottom:10px; padding:7px 10px; border-radius:6px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); line-height:1.8; }
   .pp-run-btn     { width:100%; padding:9px; border-radius:8px; border:none; background:rgba(0,200,255,0.9); color:#060a0f; font-family:'Syne',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; cursor:pointer; margin-top:4px; transition:all 0.2s; }
   .pp-run-btn:hover    { background:#00c8ff; }
   .pp-run-btn:disabled { opacity:0.4; cursor:not-allowed; }
@@ -60,7 +61,9 @@ const CSS = `
   .pp-zseg        { flex:1; text-align:center; padding:3px 2px; border-radius:3px; border:1px solid; transition:all 0.3s; }
   .pp-zbar        { width:100%; height:2px; border-radius:1px; margin-bottom:3px; }
   .pp-zlbl        { font-size:8px; color:#4a6280; }
-  .pp-ts          { margin-top:10px; font-size:9px; color:#2a3a4a; letter-spacing:1px; }
+  .pp-meta        { display:flex; gap:12px; margin-top:10px; flex-wrap:wrap; }
+  .pp-meta-item   { font-size:9px; color:#2a3a4a; letter-spacing:1px; }
+  .pp-meta-val    { color:#3a5a6a; }
   .pp-skel        { height:52px; background:#0b1120; border-radius:6px; animation:pp-pulse 1.4s ease-in-out infinite; margin-top:14px; }
   .pp-empty       { font-size:11px; color:#2a3a4a; margin-top:12px; }
   .pp-err         { font-size:11px; color:#ef4444; margin-top:10px; }
@@ -72,7 +75,14 @@ function ZoneSegments({ pct }) {
       {ZONE_THRESHOLDS.map((z) => {
         const active = pct >= z.from && pct < (z.to === 100 ? 101 : z.to);
         return (
-          <div key={z.label} className="pp-zseg" style={{ background: active ? z.color + "18" : "transparent", borderColor: active ? z.color : "#1a2740" }}>
+          <div
+            key={z.label}
+            className="pp-zseg"
+            style={{
+              background:  active ? z.color + "18" : "transparent",
+              borderColor: active ? z.color : "#1a2740",
+            }}
+          >
             <div className="pp-zbar" style={{ background: z.color }} />
             <span className="pp-zlbl">{z.label}</span>
           </div>
@@ -85,32 +95,69 @@ function ZoneSegments({ pct }) {
 function RiskCard({ type, icon, result, loading, error, onRun, zones }) {
   const isFlood = type === "flood";
 
-  // Shared
   const [zoneId, setZoneId] = useState("");
-  // Flood inputs
-  const [rainfall,  setRainfall]  = useState("25");
-  const [river,     setRiver]     = useState("1.5");
-  const [soil,      setSoil]      = useState("15");
-  // elevation auto-fetched from zone coordinates via Open-Meteo
-  // Fire inputs
+
+  // Flood simulation inputs — only the 4 most impactful ones
+  // The rest are derived/defaulted by the backend the same way weather.py does
+  const [precip1d,   setPrecip1d]   = useState("25");    // mm last 24h
+  const [precip3d,   setPrecip3d]   = useState("60");    // mm last 72h
+  const [elevation,  setElevation]  = useState("50");    // metres
+  const [twi,        setTwi]        = useState("4.0");   // topographic wetness
+
+  // Fire simulation inputs
   const [temp,     setTemp]     = useState("35");
   const [humidity, setHumidity] = useState("20");
   const [wind,     setWind]     = useState("40");
-  const [ndvi,     setNdvi]     = useState("0.4");
   const [fwi,      setFwi]      = useState("18");
 
   const cfg = result ? (RISK_CONFIG[result.risk_level] || RISK_CONFIG.LOW) : null;
   const pct = result ? Math.round(result.probability * 100) : 0;
   const ts  = result?.created_at
-    ? new Date(result.created_at).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })
+    ? new Date(result.created_at).toLocaleTimeString("fr-FR", {
+        hour: "2-digit", minute: "2-digit", second: "2-digit",
+      })
     : null;
 
   function submit() {
     if (!zoneId) return;
+
     if (isFlood) {
-      onRun({ zone_id: +zoneId, rainfall_mm: +rainfall, river_level_m: +river, soil_moisture_pct: +soil * 100, });
+      const elev = +elevation;
+      // Derive slope + upstream_area from elevation — same logic as weather.py
+      let slope;
+      if      (elev < 10)   slope = 1.0;
+      else if (elev < 50)   slope = 2.5;
+      else if (elev < 200)  slope = 6.0;
+      else if (elev < 500)  slope = 14.0;
+      else if (elev < 1500) slope = 25.0;
+      else                  slope = 35.0;
+
+      const upstream_area = Math.max(0.5, 200.0 / (elev + 1));
+
+      onRun({
+        zone_id:        +zoneId,
+        // Primary inputs — user-controlled
+        precip_1d:      +precip1d,
+        precip_3d:      +precip3d,
+        elevation:      elev,
+        TWI:            +twi,
+        // Derived from elevation — consistent with weather.py
+        slope:          slope,
+        upstream_area:  upstream_area,
+        // Neutral defaults — don't push probability up or down artificially
+        NDVI:           0.5,
+        NDWI:           -0.2,
+        jrc_perm_water: 0,
+        landcover:      40,
+      });
     } else {
-      onRun({ zone_id: +zoneId, temperature_c: +temp, humidity_pct: +humidity, wind_speed_kmh: +wind, fwi: +fwi });
+      onRun({
+        zone_id:        +zoneId,
+        temperature_c:  +temp,
+        humidity_pct:   +humidity,
+        wind_speed_kmh: +wind,
+        fwi:            +fwi,
+      });
     }
   }
 
@@ -118,7 +165,6 @@ function RiskCard({ type, icon, result, loading, error, onRun, zones }) {
     <div className="pp-card" style={{ borderColor: cfg ? cfg.border : "#1a2740" }}>
       <div className="pp-stripe" style={{ background: cfg ? cfg.color : "#1a2740" }} />
 
-      {/* Type label + live level */}
       <div className="pp-type-row">
         <span className="pp-type-icon">{icon}</span>
         <span className="pp-type-lbl">RISK {type.toUpperCase()}</span>
@@ -129,49 +175,100 @@ function RiskCard({ type, icon, result, loading, error, onRun, zones }) {
             <span className="pp-dot-ring" style={{ background: cfg.color }} />
             <span className="pp-dot-core" style={{ background: cfg.color }} />
           </span>
-          <span className="pp-level-txt" style={{ color: cfg.color }}>{cfg.label}</span>
+          <span className="pp-level-txt" style={{ color: cfg.color }}>
+            {result.risk_level}
+          </span>
         </div>
       )}
 
-      {/* Zone selector */}
-      <select className="pp-select" value={zoneId} onChange={(e) => setZoneId(e.target.value)}>
+      <select
+        className="pp-select"
+        value={zoneId}
+        onChange={(e) => setZoneId(e.target.value)}
+      >
         <option value="">— Select zone —</option>
         {zones.map((z) => (
-          <option key={z.id} value={z.id}>{z.name} ({z.code})</option>
+          <option key={z.id} value={z.id}>
+            {z.name} ({z.code})
+          </option>
         ))}
       </select>
 
-      {/* Inputs */}
       {isFlood ? (
         <>
+          {/* Row 1: precipitation */}
           <div className="pp-grid">
-            <div><div className="pp-field-lbl">RAINFALL (mm)</div><input className="pp-input" type="number" value={rainfall} onChange={(e) => setRainfall(e.target.value)} /></div>
-            <div><div className="pp-field-lbl">RIVER LEVEL (m)</div><input className="pp-input" type="number" value={river} onChange={(e) => setRiver(e.target.value)} /></div>
+            <div>
+              <div className="pp-field-lbl">PRECIP 24H (mm)</div>
+              <div className="pp-field-hint">Rain last 24 hours</div>
+              <input className="pp-input" type="number" min="0" step="1"
+                value={precip1d} onChange={(e) => setPrecip1d(e.target.value)} />
+            </div>
+            <div>
+              <div className="pp-field-lbl">PRECIP 72H (mm)</div>
+              <div className="pp-field-hint">Rain last 3 days</div>
+              <input className="pp-input" type="number" min="0" step="1"
+                value={precip3d} onChange={(e) => setPrecip3d(e.target.value)} />
+            </div>
           </div>
-          <div className="pp-grid">
-            <div><div className="pp-field-lbl">SOIL MOISTURE (%)</div><input className="pp-input" type="number" step="0.1" value={soil} onChange={(e) => setSoil(e.target.value)} /></div>
 
+          {/* Row 2: terrain */}
+          <div className="pp-grid">
+            <div>
+              <div className="pp-field-lbl">ELEVATION (m)</div>
+              <div className="pp-field-hint">Terrain height</div>
+              <input className="pp-input" type="number" min="0" step="10"
+                value={elevation} onChange={(e) => setElevation(e.target.value)} />
+            </div>
+            <div>
+              <div className="pp-field-lbl">TWI</div>
+              <div className="pp-field-hint">Wetness index 0–15</div>
+              <input className="pp-input" type="number" min="0" max="15" step="0.5"
+                value={twi} onChange={(e) => setTwi(e.target.value)} />
+            </div>
           </div>
-          <div className="pp-info-note">📍 Elevation auto-detected from zone coordinates</div>
+
+          {/* Auto-derived fields notice */}
+          <div className="pp-defaults">
+            AUTO-DERIVED · slope & upstream area from elevation<br />
+            FIXED DEFAULTS · NDVI 0.5 · NDWI −0.2 · landcover cropland
+          </div>
         </>
       ) : (
-        <>
-          <div className="pp-grid">
-            <div><div className="pp-field-lbl">TEMPERATURE (°C)</div><input className="pp-input" type="number" value={temp} onChange={(e) => setTemp(e.target.value)} /></div>
-            <div><div className="pp-field-lbl">HUMIDITY (%)</div><input className="pp-input" type="number" value={humidity} onChange={(e) => setHumidity(e.target.value)} /></div>
-            <div><div className="pp-field-lbl">WIND (km/h)</div><input className="pp-input" type="number" value={wind} onChange={(e) => setWind(e.target.value)} /></div>
-            <div><div className="pp-field-lbl">FWI INDEX</div><input className="pp-input" type="number" value={fwi} onChange={(e) => setFwi(e.target.value)} /></div>
+        <div className="pp-grid">
+          <div>
+            <div className="pp-field-lbl">TEMPERATURE (°C)</div>
+            <input className="pp-input" type="number"
+              value={temp} onChange={(e) => setTemp(e.target.value)} />
           </div>
-        </>
+          <div>
+            <div className="pp-field-lbl">HUMIDITY (%)</div>
+            <input className="pp-input" type="number"
+              value={humidity} onChange={(e) => setHumidity(e.target.value)} />
+          </div>
+          <div>
+            <div className="pp-field-lbl">WIND (km/h)</div>
+            <input className="pp-input" type="number"
+              value={wind} onChange={(e) => setWind(e.target.value)} />
+          </div>
+          <div>
+            <div className="pp-field-lbl">FWI INDEX</div>
+            <input className="pp-input" type="number"
+              value={fwi} onChange={(e) => setFwi(e.target.value)} />
+          </div>
+        </div>
       )}
 
-      <button className="pp-run-btn" onClick={submit} disabled={loading || !zoneId}>
-        {loading ? "RUNNING..." : "▶ RUN PREDICTION"}
+      <button
+        className="pp-run-btn"
+        onClick={submit}
+        disabled={loading || !zoneId}
+      >
+        {loading ? "RUNNING..." : "▶ RUN SIMULATION"}
       </button>
 
-      {/* Result area */}
       {loading && <div className="pp-skel" />}
-      {!loading && error && <div className="pp-err">⚠ {error}</div>}
+      {!loading && error  && <div className="pp-err">⚠ {error}</div>}
       {!loading && !error && result && (
         <div className="pp-result">
           <div className="pp-score-row">
@@ -179,17 +276,37 @@ function RiskCard({ type, icon, result, loading, error, onRun, zones }) {
             <span className="pp-score-sym" style={{ color: cfg.color }}>%</span>
           </div>
           <div className="pp-bar-track">
-            <div className="pp-bar-fill" style={{ width: `${pct}%`, background: cfg.color, boxShadow: `0 0 6px ${cfg.color}55` }} />
+            <div
+              className="pp-bar-fill"
+              style={{
+                width:     `${pct}%`,
+                background: cfg.color,
+                boxShadow: `0 0 6px ${cfg.color}55`,
+              }}
+            />
           </div>
           <div className="pp-ticks">
-            {[0, 30, 50, 80, 100].map((v) => <span key={v} className="pp-tick">{v}</span>)}
+            {[0, 30, 70, 90, 100].map((v) => (
+              <span key={v} className="pp-tick">{v}</span>
+            ))}
           </div>
           <ZoneSegments pct={pct} />
-          {ts && <div className="pp-ts">UPDATED · {ts} · model: {result.model_version}</div>}
+          <div className="pp-meta">
+            {ts && (
+              <span className="pp-meta-item">
+                UPDATED · <span className="pp-meta-val">{ts}</span>
+              </span>
+            )}
+            {result.model_version && (
+              <span className="pp-meta-item">
+                MODEL · <span className="pp-meta-val">{result.model_version}</span>
+              </span>
+            )}
+          </div>
         </div>
       )}
       {!loading && !error && !result && (
-        <div className="pp-empty">Select a zone and press RUN to predict</div>
+        <div className="pp-empty">Select a zone and press RUN to simulate</div>
       )}
     </div>
   );
@@ -206,7 +323,8 @@ export default function PredictionPanel({ zones = [] }) {
   const runFlood = useCallback(async (body) => {
     setFloodLoading(true); setFloodError(null);
     try {
-      const res = await api.post("/predictions/flood?dry_run=true", body);
+      const { zone_id, ...rest } = body;
+      const res = await api.post(`/predictions/flood/${zone_id}/simulate`, rest);
       setFloodResult(res.data);
     } catch (e) {
       setFloodError(e.response?.data?.detail || e.message);
@@ -216,7 +334,8 @@ export default function PredictionPanel({ zones = [] }) {
   const runFire = useCallback(async (body) => {
     setFireLoading(true); setFireError(null);
     try {
-      const res = await api.post("/predictions/fire?dry_run=true", body);
+      const { zone_id, ...rest } = body;
+      const res = await api.post(`/predictions/fire/${zone_id}?dry_run=true`, rest);
       setFireResult(res.data);
     } catch (e) {
       setFireError(e.response?.data?.detail || e.message);
@@ -227,7 +346,8 @@ export default function PredictionPanel({ zones = [] }) {
     if (!floodResult && !fireResult) return null;
     const fl = floodResult?.risk_level || "LOW";
     const fi = fireResult?.risk_level  || "LOW";
-    return RISK_CONFIG[(RISK_ORDER[fl] || 0) >= (RISK_ORDER[fi] || 0) ? fl : fi];
+    const winner = RISK_ORDER[fl] >= RISK_ORDER[fi] ? fl : fi;
+    return { cfg: RISK_CONFIG[winner], label: winner };
   })();
 
   return (
@@ -238,21 +358,37 @@ export default function PredictionPanel({ zones = [] }) {
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{ width: 2, height: 18, background: "#00c8ff", borderRadius: 1 }} />
-              <span className="pp-title">Risk Predictions</span>
+              <span className="pp-title">Risk Simulation</span>
             </div>
-            <div className="pp-sub">ML · XGBoost v8.0 · POST /predictions/flood|fire</div>
+            <div className="pp-sub">
+              DRY RUN · XGBoost v1.1.0-engineered · manual inputs
+            </div>
           </div>
           {worstRisk && (
-            <div className="pp-badge" style={{ color: worstRisk.color, borderColor: worstRisk.border, background: worstRisk.bg }}>
-              OVERALL · {(floodResult?.risk_level && fireResult?.risk_level) ?
-                (RISK_ORDER[floodResult.risk_level] >= RISK_ORDER[fireResult.risk_level] ? floodResult.risk_level : fireResult.risk_level)
-                : (floodResult?.risk_level || fireResult?.risk_level)}
+            <div
+              className="pp-badge"
+              style={{
+                color:       worstRisk.cfg.color,
+                borderColor: worstRisk.cfg.border,
+                background:  worstRisk.cfg.bg,
+              }}
+            >
+              OVERALL · {worstRisk.label}
             </div>
           )}
         </div>
+
         <div className="pp-cards">
-          <RiskCard type="flood" icon="💧" result={floodResult} loading={floodLoading} error={floodError} onRun={runFlood} zones={zones} />
-          <RiskCard type="fire"  icon="🔥" result={fireResult}  loading={fireLoading}  error={fireError}  onRun={runFire}  zones={zones} />
+          <RiskCard
+            type="flood" icon="💧"
+            result={floodResult} loading={floodLoading} error={floodError}
+            onRun={runFlood} zones={zones}
+          />
+          <RiskCard
+            type="fire" icon="🔥"
+            result={fireResult} loading={fireLoading} error={fireError}
+            onRun={runFire} zones={zones}
+          />
         </div>
       </div>
     </>

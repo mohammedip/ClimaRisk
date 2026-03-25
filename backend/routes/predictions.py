@@ -12,6 +12,7 @@ from schemas.prediction import (
     FirePredictionResponse,
     probability_to_risk_level,
 )
+from schemas.prediction import FloodSimulationRequest 
 from services.predict import flood_probability, fire_probability
 from services.weather import fetch_weather
 
@@ -47,6 +48,48 @@ async def auto_alert(db: AsyncSession, zone: Zone, hazard: str, risk_level: str,
 
 
 # ── Flood Prediction (AUTO WEATHER + ML) ──────────────────────────────────────
+
+
+
+@router.post("/flood/{zone_id}/simulate", response_model=FloodPredictionResponse, status_code=201)
+async def simulate_flood(
+    zone_id: int,
+    body: FloodSimulationRequest,
+    db: AsyncSession = Depends(get_db),
+    _=Depends(get_current_user),
+):
+    zone = await get_zone_or_404(zone_id, db)
+
+    try:
+        probability = flood_probability(
+            precip_1d      = body.precip_1d,
+            precip_3d      = body.precip_3d,
+            ndvi           = body.NDVI,
+            ndwi           = body.NDWI,
+            jrc_perm_water = body.jrc_perm_water,
+            landcover      = body.landcover,
+            elevation      = body.elevation,
+            slope          = body.slope,
+            upstream_area  = body.upstream_area,
+            twi            = body.TWI,
+            lat            = zone.latitude,
+            lon            = zone.longitude,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Flood model error: {e}")
+
+    risk_level = probability_to_risk_level(probability)
+
+    # Simulation is always dry-run — never saved to DB
+    return FloodPredictionResponse(
+        id=None,
+        zone_id=zone.id,
+        probability=probability,
+        risk_level=risk_level,
+        model_version="xgboost-sim",
+        created_at=None,
+    )
+
 
 @router.post("/flood/{zone_id}", response_model=FloodPredictionResponse, status_code=201)
 async def predict_flood(
