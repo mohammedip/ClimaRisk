@@ -10,7 +10,6 @@ from airflow.operators.python import PythonOperator
 
 logger = logging.getLogger("climarisk.dag")
 
-# ── Config ────────────────────────────────────────────────────────────────────
 DB_CONFIG = {
     "host":     os.environ.get("POSTGRES_HOST", "postgres"),
     "port":     int(os.environ.get("POSTGRES_PORT", 5432)),
@@ -22,11 +21,9 @@ DB_CONFIG = {
 BACKEND_URL     = os.environ.get("BACKEND_URL", "http://backend:8000")
 PUSHGATEWAY_URL = os.environ.get("PROMETHEUS_PUSHGATEWAY_URL", "http://pushgateway:9091")
 
-# ── DAG credentials (service account) ────────────────────────────────────────
 DAG_USERNAME = os.environ.get("DAG_USERNAME", "reida")
 DAG_PASSWORD = os.environ.get("DAG_PASSWORD", "123456")
 
-# ── DAG default args ──────────────────────────────────────────────────────────
 default_args = {
     "owner":            "climarisk",
     "depends_on_past":  False,
@@ -48,7 +45,6 @@ dag = DAG(
 )
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
 
 def _get_conn():
     import psycopg2
@@ -65,7 +61,6 @@ def _get_token() -> str:
     return resp.json()["access_token"]
 
 
-# ── Task 1: Get all active zones ──────────────────────────────────────────────
 
 def get_active_zones(**context):
     conn = _get_conn()
@@ -96,7 +91,6 @@ def get_active_zones(**context):
     return len(zones)
 
 
-# ── Task 2: Run predictions for all zones ─────────────────────────────────────
 
 def predict_all_zones(**context):
     zones = context["ti"].xcom_pull(key="zones", task_ids="get_active_zones")
@@ -104,7 +98,6 @@ def predict_all_zones(**context):
         logger.warning("No zones found — skipping predictions")
         return
 
-    # Get auth token once for all requests
     try:
         token = _get_token()
     except Exception as e:
@@ -117,7 +110,6 @@ def predict_all_zones(**context):
 
     for zone in zones:
         try:
-            # ── Flood prediction ──────────────────────────────────────────
             flood_resp = _requests.post(
                 f"{BACKEND_URL}/api/predictions/flood/{zone['id']}",
                 headers=headers,
@@ -129,7 +121,6 @@ def predict_all_zones(**context):
             flood_prob  = flood_data.get("probability", 0.0)
             flood_level = flood_data.get("risk_level", "LOW")
 
-            # ── Fire prediction ───────────────────────────────────────────
             fire_resp = _requests.post(
                 f"{BACKEND_URL}/api/predictions/fire/{zone['id']}",
                 headers=headers,
@@ -165,7 +156,6 @@ def predict_all_zones(**context):
         raise Exception(f"{errors} zone(s) failed — check logs above")
 
 
-# ── Task 3: Push metrics to Prometheus Pushgateway ────────────────────────────
 
 def push_metrics(**context):
     summary = context["ti"].xcom_pull(key="summary", task_ids="predict_all_zones")
@@ -197,7 +187,6 @@ def push_metrics(**context):
         logger.warning(f"⚠️  Pushgateway unavailable: {e}")
 
 
-# ── Wire up tasks ─────────────────────────────────────────────────────────────
 
 t1 = PythonOperator(task_id="get_active_zones",  python_callable=get_active_zones,  dag=dag)
 t2 = PythonOperator(task_id="predict_all_zones", python_callable=predict_all_zones, dag=dag)

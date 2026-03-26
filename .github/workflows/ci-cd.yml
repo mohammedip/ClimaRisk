@@ -1,0 +1,110 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  DOCKERHUB_BACKEND_IMAGE:  ${{ secrets.DOCKERHUB_USERNAME }}/climarisk-backend
+  DOCKERHUB_FRONTEND_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/climarisk-frontend
+
+jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Check code quality
+        run: ruff check backend/ --select E,F --ignore E501,E402,F401,F811
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y libpq-dev
+          pip install --upgrade pip
+          pip install -r backend/requirements.txt
+          pip install pytest pytest-asyncio httpx aiosqlite
+
+      - name: Run tests
+        env:
+          PYTEST_ASYNCIO_MODE: auto
+          PYTHONPATH: ".:backend"
+          DATABASE_URL: sqlite:///test.db
+          ASYNC_DATABASE_URL: sqlite+aiosqlite:///test.db
+          SECRET_KEY: ci-test-secret-key
+          ALGORITHM: HS256
+        run: pytest backend/tests/ -v --tb=short
+
+      - name: Validate ML model sanity
+        env:
+          PYTHONPATH: ".:backend"
+        run: python backend/tests/test_model_sanity.py
+
+  build-and-push:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache
+          sudo docker image prune -af
+          df -h /
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build & push backend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          file: backend/Dockerfile
+          push: true
+          tags: |
+            ${{ env.DOCKERHUB_BACKEND_IMAGE }}:latest
+            ${{ env.DOCKERHUB_BACKEND_IMAGE }}:${{ github.sha }}
+
+      - name: Build & push frontend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          file: frontend/Dockerfile
+          push: true
+          tags: |
+            ${{ env.DOCKERHUB_FRONTEND_IMAGE }}:latest
+            ${{ env.DOCKERHUB_FRONTEND_IMAGE }}:${{ github.sha }}
