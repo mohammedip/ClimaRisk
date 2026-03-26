@@ -51,7 +51,7 @@ async def delete_zone(
     db:      AsyncSession = Depends(get_db),
     _=       Depends(require_role("ADMIN")),
 ):
-    """Soft delete a zone — ADMIN only."""
+
     result = await db.execute(select(Zone).where(Zone.id == zone_id))
     zone   = result.scalar_one_or_none()
     if not zone:

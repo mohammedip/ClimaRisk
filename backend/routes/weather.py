@@ -16,7 +16,7 @@ async def get_zone_weather(
     db:      AsyncSession = Depends(get_db),
     _=       Depends(get_current_user),
 ):
-    """Fetch current weather for a zone from Open-Meteo."""
+
     result = await db.execute(select(Zone).where(Zone.id == zone_id, Zone.is_active == True))
     zone   = result.scalar_one_or_none()
     if not zone:

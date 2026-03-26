@@ -12,7 +12,6 @@ from models.user import User
 router = APIRouter()
 
 
-# ── Schemas ───────────────────────────────────────────────────────────────────
 
 class UserResponse(BaseModel):
     id:         int
@@ -39,21 +38,20 @@ class UserUpdateTeam(BaseModel):
     team_name: Optional[str] = None
 
 
-# ── Routes ────────────────────────────────────────────────────────────────────
 
 @router.get("/", response_model=list[UserResponse])
 async def list_users(
     db: AsyncSession = Depends(get_db),
     _=  Depends(require_role("ADMIN")),
 ):
-    """List all users — ADMIN only."""
+
     result = await db.execute(select(User).order_by(User.created_at.desc()))
     return result.scalars().all()
 
 
 @router.get("/me", response_model=UserResponse)
 async def get_me(current_user=Depends(get_current_user)):
-    """Current authenticated user."""
+
     return current_user
 
 
@@ -77,7 +75,7 @@ async def update_role(
     db:      AsyncSession = Depends(get_db),
     current_user=Depends(require_role("ADMIN")),
 ):
-    """Change a user's role — ADMIN only."""
+
     if body.role not in ("PUBLIC", "RESCUE", "ADMIN"):
         raise HTTPException(status_code=400, detail="role must be PUBLIC, RESCUE or ADMIN")
 
@@ -100,7 +98,7 @@ async def deactivate_user(
     db:      AsyncSession = Depends(get_db),
     current_user=Depends(require_role("ADMIN")),
 ):
-    """Deactivate a user account — ADMIN only."""
+
     result = await db.execute(select(User).where(User.id == user_id))
     user   = result.scalar_one_or_none()
     if not user:
@@ -120,7 +118,7 @@ async def activate_user(
     db:      AsyncSession = Depends(get_db),
     _=       Depends(require_role("ADMIN")),
 ):
-    """Re-activate a user account — ADMIN only."""
+
     result = await db.execute(select(User).where(User.id == user_id))
     user   = result.scalar_one_or_none()
     if not user:
@@ -138,7 +136,7 @@ async def delete_user(
     db:      AsyncSession = Depends(get_db),
     current_user=Depends(require_role("ADMIN")),
 ):
-    """Permanently delete a user — ADMIN only."""
+
     result = await db.execute(select(User).where(User.id == user_id))
     user   = result.scalar_one_or_none()
     if not user:

@@ -46,7 +46,6 @@ async def auto_alert(db: AsyncSession, zone: Zone, hazard: str, risk_level: str,
     ))
 
 
-# ── Flood Prediction (AUTO WEATHER + ML) ──────────────────────────────────────
 
 
 
@@ -79,7 +78,6 @@ async def simulate_flood(
 
     risk_level = probability_to_risk_level(probability)
 
-    # Simulation is always dry-run — never saved to DB
     return FloodPredictionResponse(
         id=None,
         zone_id=zone.id,
@@ -149,7 +147,6 @@ async def predict_flood(
     return prediction
 
 
-# ── Fire Prediction (AUTO WEATHER) ────────────────────────────────────────────
 
 @router.post("/fire/{zone_id}", response_model=FirePredictionResponse, status_code=201)
 async def predict_fire(
@@ -203,7 +200,6 @@ async def predict_fire(
     return prediction
 
 
-# ── Latest Predictions (for map) ──────────────────────────────────────────────
 
 @router.get("/latest", response_model=list[dict])
 async def get_latest_predictions(
