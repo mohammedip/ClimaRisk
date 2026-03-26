@@ -1,23 +1,9 @@
-"""
-ClimaRisk Prometheus Metrics
-==============================
-All custom metrics defined in one place.
-Import from here in main.py, scheduler, routers, etc.
-
-Usage:
-    from services.metrics import (
-        flood_predictions_total,
-        flood_probability_histogram,
-        ...
-    )
-"""
 from prometheus_client import Counter, Histogram, Gauge, Summary
 
-# ── Flood predictions ─────────────────────────────────────────────────────────
 flood_predictions_total = Counter(
     "climarisk_flood_predictions_total",
     "Total number of flood predictions made",
-    ["risk_level", "source"],   # source: manual | scheduler | airflow
+    ["risk_level", "source"],  
 )
 
 flood_probability_histogram = Histogram(
@@ -27,7 +13,6 @@ flood_probability_histogram = Histogram(
     buckets=[0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
 )
 
-# ── Fire predictions ──────────────────────────────────────────────────────────
 fire_predictions_total = Counter(
     "climarisk_fire_predictions_total",
     "Total number of fire predictions made",
@@ -41,7 +26,6 @@ fire_probability_histogram = Histogram(
     buckets=[0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
 )
 
-# ── Alerts ────────────────────────────────────────────────────────────────────
 alerts_created_total = Counter(
     "climarisk_alerts_created_total",
     "Total number of alerts auto-created",
@@ -54,13 +38,11 @@ active_alerts_gauge = Gauge(
     ["hazard_type"],
 )
 
-# ── Zones ─────────────────────────────────────────────────────────────────────
 active_zones_gauge = Gauge(
     "climarisk_active_zones_total",
     "Total number of active monitored zones",
 )
 
-# ── Airflow DAG ───────────────────────────────────────────────────────────────
 dag_run_duration = Summary(
     "climarisk_dag_run_duration_seconds",
     "Time taken for a full Airflow DAG prediction run",
@@ -71,7 +53,6 @@ dag_zone_errors = Counter(
     "Number of zones that failed during DAG run",
 )
 
-# ── Weather API ───────────────────────────────────────────────────────────────
 weather_fetch_duration = Histogram(
     "climarisk_weather_fetch_duration_seconds",
     "Time taken to fetch weather data from Open-Meteo",
@@ -83,7 +64,6 @@ weather_fetch_errors = Counter(
     "Number of failed weather API calls",
 )
 
-# ── System resources (psutil) ─────────────────────────────────────────────────
 cpu_usage_gauge = Gauge(
     "climarisk_system_cpu_percent",
     "Current CPU usage percentage",

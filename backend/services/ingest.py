@@ -55,10 +55,7 @@ def split_documents(docs: List[Document]) -> List[Document]:
 
 
 def add_passage_prefix(docs: List[Document]) -> List[Document]:
-    """
-    multilingual-e5 requires 'passage: ' prefix on stored documents
-    and 'query: ' prefix on queries at retrieval time.
-    """
+
     for doc in docs:
         doc.page_content = "passage: " + doc.page_content
     return docs

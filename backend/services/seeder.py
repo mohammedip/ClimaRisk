@@ -1,12 +1,3 @@
-"""
-ClimaRisk Zone Seeder
-======================
-Standalone script — creates its own DB engine to avoid event loop conflicts.
-
-Run:
-  docker exec climarisk_backend python services/seeder.py
-"""
-
 import asyncio
 import os
 import sys
@@ -26,7 +17,7 @@ DATABASE_URL = (
 )
 
 ALL_ZONES = [
-    # ── Africa ────────────────────────────────────────────────────────────────
+
     ("Alger", "DZ-ALG", "Alger", "Algeria", 36.7372, 3.0865, 3415811),
     ("Cairo", "EG-CAI", "Cairo", "Egypt", 30.0444, 31.2357, 10107000),
     ("Lagos", "NG-LAG", "Lagos", "Nigeria", 6.5244, 3.3792, 14862111),
@@ -38,8 +29,8 @@ ALL_ZONES = [
     ("Addis Ababa", "ET-ADD", "Addis Ababa", "Ethiopia", 9.0320, 38.7468, 3384569),
     ("Dar es Salaam", "TZ-DAR", "Dar es Salaam", "Tanzania", -6.7924, 39.2083, 4364541),
     ("Accra", "GH-ACC", "Greater Accra", "Ghana", 5.6037, -0.1870, 2277282),
-# ── Morocco (comprehensive) ───────────────────────────────────────────────
-    # Casablanca-Settat
+
+
     ("Casablanca",        "MA-CAS",     "Casablanca-Settat",       "Morocco",  33.5731,  -7.5898, 3752000),
     ("Mohammedia",        "MA-MOH",     "Casablanca-Settat",       "Morocco",  33.6866,  -7.3833,  220000),
     ("El Jadida",         "MA-EJD",     "Casablanca-Settat",       "Morocco",  33.2316,  -8.5007,  200000),
@@ -50,7 +41,7 @@ ALL_ZONES = [
     ("Azemmour",          "MA-AZM",     "Casablanca-Settat",       "Morocco",  33.2833,  -8.3500,   45000),
     ("Mediouna",          "MA-MED",     "Casablanca-Settat",       "Morocco",  33.4500,  -7.5167,   60000),
     ("Nouaceur",          "MA-NOU",     "Casablanca-Settat",       "Morocco",  33.3667,  -7.5833,   45000),
-    # Rabat-Salé-Kénitra
+
     ("Rabat",             "MA-RAB",     "Rabat-Salé-Kénitra",      "Morocco",  34.0209,  -6.8416,  580000),
     ("Salé",              "MA-SAL",     "Rabat-Salé-Kénitra",      "Morocco",  34.0531,  -6.7985,  900000),
     ("Kénitra",           "MA-KEN",     "Rabat-Salé-Kénitra",      "Morocco",  34.2610,  -6.5802,  430000),
@@ -62,7 +53,7 @@ ALL_ZONES = [
     ("Sidi Kacem",        "MA-SKC",     "Rabat-Salé-Kénitra",      "Morocco",  34.2167,  -5.7000,   90000),
     ("Souk el Arba",      "MA-SEA",     "Rabat-Salé-Kénitra",      "Morocco",  34.6833,  -5.9833,   50000),
     ("Ouazzane",          "MA-OUZ",     "Rabat-Salé-Kénitra",      "Morocco",  34.7833,  -5.5833,   60000),
-    # Fès-Meknès
+
     ("Fès",               "MA-FES",     "Fès-Meknès",              "Morocco",  34.0181,  -5.0078, 1112000),
     ("Meknès",            "MA-MEK",     "Fès-Meknès",              "Morocco",  33.8935,  -5.5547,  632000),
     ("Ifrane",            "MA-IFR",     "Fès-Meknès",              "Morocco",  33.5228,  -5.1072,   15000),
@@ -74,7 +65,7 @@ ALL_ZONES = [
     ("El Hajeb",          "MA-EHJ",     "Fès-Meknès",              "Morocco",  33.6833,  -5.3667,   40000),
     ("Missour",           "MA-MIS",     "Fès-Meknès",              "Morocco",  33.0500,  -3.9833,   35000),
     ("Guercif",           "MA-GUE",     "Fès-Meknès",              "Morocco",  34.2333,  -3.3500,   70000),
-    # Marrakech-Safi
+
     ("Marrakech",         "MA-MAR",     "Marrakech-Safi",          "Morocco",  31.6295,  -7.9811,  928850),
     ("Safi",              "MA-SAF",     "Marrakech-Safi",          "Morocco",  32.2994,  -9.2372,  308000),
     ("Essaouira",         "MA-ESS",     "Marrakech-Safi",          "Morocco",  31.5085,  -9.7595,   77000),
@@ -85,7 +76,7 @@ ALL_ZONES = [
     ("Tahanaout",         "MA-TAH",     "Marrakech-Safi",          "Morocco",  31.3500,  -7.9500,   25000),
     ("Ait Ourir",         "MA-AOU",     "Marrakech-Safi",          "Morocco",  31.5667,  -7.6667,   30000),
     ("Demnate",           "MA-DEM",     "Marrakech-Safi",          "Morocco",  31.7167,  -7.0000,   35000),
-    # Tanger-Tétouan-Al Hoceïma
+
     ("Tanger",            "MA-TAN",     "Tanger-Tétouan-Al Hoceïma","Morocco", 35.7595,  -5.8330,  947952),
     ("Tétouan",           "MA-TET",     "Tanger-Tétouan-Al Hoceïma","Morocco", 35.5889,  -5.3626,  380787),
     ("Al Hoceïma",        "MA-ALH",     "Tanger-Tétouan-Al Hoceïma","Morocco", 35.2517,  -3.9372,   56716),
@@ -101,7 +92,7 @@ ALL_ZONES = [
     ("Imzouren",          "MA-IMZ",     "Tanger-Tétouan-Al Hoceïma","Morocco", 35.1500,  -3.8500,   35000),
     ("Beni Mellal-Khenifra",
                           "MA-BMK",     "Beni Mellal-Khénifra",    "Morocco",  32.3373,  -6.3498,  192000),
-    # Béni Mellal-Khénifra
+
     ("Khénifra",          "MA-KHN",     "Béni Mellal-Khénifra",    "Morocco",  32.9333,  -5.6667,  100000),
     ("Azilal",            "MA-AZL",     "Béni Mellal-Khénifra",    "Morocco",  31.9667,  -6.5667,   45000),
     ("Khouribga",         "MA-KHO",     "Béni Mellal-Khénifra",    "Morocco",  32.8833,  -6.9167,  197000),
@@ -109,7 +100,7 @@ ALL_ZONES = [
     ("Souk Sebt",         "MA-SSB",     "Béni Mellal-Khénifra",    "Morocco",  32.5333,  -7.0333,   45000),
     ("Midelt",            "MA-MID",     "Béni Mellal-Khénifra",    "Morocco",  32.6833,  -4.7333,   55000),
     ("Zaouiat Cheikh",    "MA-ZCH",     "Béni Mellal-Khénifra",    "Morocco",  32.5167,  -6.1833,   25000),
-    # Oriental
+
     ("Oujda",             "MA-OUJ",     "Oriental",                "Morocco",  34.6867,  -1.9114,  494252),
     ("Nador",             "MA-NAD",     "Oriental",                "Morocco",  35.1681,  -2.9335,  161726),
     ("Berkane",           "MA-BRK",     "Oriental",                "Morocco",  34.9167,  -2.3167,  110000),
@@ -119,7 +110,7 @@ ALL_ZONES = [
     ("Bouarfa",           "MA-BUA",     "Oriental",                "Morocco",  32.5333,  -1.9667,   35000),
     ("Selouane",          "MA-SEL",     "Oriental",                "Morocco",  35.0833,  -2.9333,   30000),
     ("Zaio",              "MA-ZAI",     "Oriental",                "Morocco",  34.9500,  -2.7333,   40000),
-    # Souss-Massa
+
     ("Agadir",            "MA-AGA",     "Souss-Massa",             "Morocco",  30.4278,  -9.5981,  421844),
     ("Inezgane",          "MA-INE",     "Souss-Massa",             "Morocco",  30.3583,  -9.5347,  130000),
     ("Tiznit",            "MA-TIZ",     "Souss-Massa",             "Morocco",  29.6974,  -9.7316,   75000),
@@ -131,7 +122,7 @@ ALL_ZONES = [
     ("Tata",              "MA-TAT",     "Souss-Massa",             "Morocco",  29.7500,  -7.9667,   25000),
     ("Sidi Ifni",         "MA-SID",     "Souss-Massa",             "Morocco",  29.3794,  -10.1728,  25000),
     ("Massa",             "MA-MAS",     "Souss-Massa",             "Morocco",  30.0667,  -9.6500,   20000),
-    # Drâa-Tafilalet
+
     ("Errachidia",        "MA-ERR",     "Drâa-Tafilalet",          "Morocco",  31.9314,  -4.4249,   99000),
     ("Zagora",            "MA-ZAG",     "Drâa-Tafilalet",          "Morocco",  30.3333,  -5.8333,   35000),
     ("Tinghir",           "MA-TIN",     "Drâa-Tafilalet",          "Morocco",  31.5147,  -5.5236,   45000),
@@ -141,16 +132,16 @@ ALL_ZONES = [
     ("Merzouga",          "MA-MER",     "Drâa-Tafilalet",          "Morocco",  31.0800,  -3.9733,    5000),
     ("Alnif",             "MA-ALN",     "Drâa-Tafilalet",          "Morocco",  31.1167,  -5.1667,   10000),
     ("Goulmima",          "MA-GOU",     "Drâa-Tafilalet",          "Morocco",  31.6833,  -4.9667,   30000),
-    # Laâyoune-Sakia El Hamra
+
     ("Laâyoune",          "MA-LAA",     "Laâyoune-Sakia El Hamra", "Morocco",  27.1536, -13.2033,  217732),
     ("Boujdour",          "MA-BJD",     "Laâyoune-Sakia El Hamra", "Morocco",  26.1253, -14.4849,   63000),
     ("Tarfaya",           "MA-TRF",     "Laâyoune-Sakia El Hamra", "Morocco",  27.9333, -12.9167,   10000),
     ("Smara",             "MA-SMA",     "Laâyoune-Sakia El Hamra", "Morocco",  26.7333, -11.6667,   45000),
     ("El Marsa",          "MA-ELM",     "Laâyoune-Sakia El Hamra", "Morocco",  27.1500, -13.4000,   15000),
-    # Dakhla-Oued Ed-Dahab
+
     ("Dakhla",            "MA-DAK",     "Dakhla-Oued Ed-Dahab",    "Morocco",  23.6848, -15.9579,  106277),
     ("Aousserd",          "MA-AOU2",    "Dakhla-Oued Ed-Dahab",    "Morocco",  22.5500, -14.3333,    5000),
-    # Guelmim-Oued Noun
+
     ("Guelmim",           "MA-GUL",     "Guelmim-Oued Noun",       "Morocco",  28.9833,  -10.0572,  120000),
     ("Tan-Tan",           "MA-TTN",     "Guelmim-Oued Noun",       "Morocco",  28.4378,  -11.1031,   60000),
     ("Assa",              "MA-ASS",     "Guelmim-Oued Noun",       "Morocco",  28.6000,  -9.4333,   15000),
@@ -176,7 +167,7 @@ ALL_ZONES = [
     ("Port Harcourt", "NG-RI", "Rivers", "Nigeria", 4.8156, 7.0498, 1865000),
     ("Warri", "NG-DT", "Delta", "Nigeria", 5.5167, 5.7500, 536000),
     ("Calabar", "NG-CR", "Cross River", "Nigeria", 4.9517, 8.3220, 461796),
-    # ── Asia ──────────────────────────────────────────────────────────────────
+
     ("Beijing", "CN-BJ", "Beijing", "China", 39.9042, 116.4074, 21893095),
     ("Shanghai", "CN-SH", "Shanghai", "China", 31.2304, 121.4737, 24870895),
     ("Guangzhou", "CN-GD", "Guangdong", "China", 23.1291, 113.2644, 18676605),
@@ -248,7 +239,7 @@ ALL_ZONES = [
     ("Tashkent", "UZ-TAS", "Tashkent", "Uzbekistan", 41.2995, 69.2401, 2571668),
     ("Almaty", "KZ-ALA", "Almaty", "Kazakhstan", 43.2220, 76.8512, 1977011),
     ("Guam", "GU-HAG", "Hagatna", "Guam", 13.4443, 144.7937, 172400),
-    # ── Europe ────────────────────────────────────────────────────────────────
+
     ("Paris", "FR-75", "Île-de-France", "France", 48.8566, 2.3522, 2161000),
     ("Lyon", "FR-69", "Auvergne-Rhône-Alpes", "France", 45.7640, 4.8357, 522228),
     ("Marseille", "FR-13", "Provence-Alpes-Côte d'Azur", "France", 43.2965, 5.3698, 870731),
@@ -295,7 +286,7 @@ ALL_ZONES = [
     ("Yakutsk", "RU-SA", "Sakha Republic", "Russia", 62.0355, 129.6755, 355521),
     ("Khabarovsk", "RU-KHA", "Khabarovsk Krai", "Russia", 48.4827, 135.0840, 618150),
     ("Kyiv", "UA-KIV", "Kyiv", "Ukraine", 50.4501, 30.5234, 2967360),
-    # ── Americas ──────────────────────────────────────────────────────────────
+
     ("New York", "US-NY", "New York", "United States", 40.7128, -74.0060, 8336817),
     ("Los Angeles", "US-CA", "California", "United States", 34.0522, -118.2437, 3979576),
     ("Chicago", "US-IL", "Illinois", "United States", 41.8781, -87.6298, 2693976),
@@ -327,7 +318,7 @@ ALL_ZONES = [
     ("San Juan", "PR-SJ", "San Juan", "Puerto Rico", 18.4655, -66.1057, 395326),
     ("Kingston", "JM-KGN", "Kingston", "Jamaica", 17.9971, -76.7936, 937700),
     ("Port of Spain", "TT-POS", "Port of Spain", "Trinidad and Tobago", 10.6549, -61.5019, 544000),
-    # ── Oceania ───────────────────────────────────────────────────────────────
+
     ("Sydney", "AU-NSW", "New South Wales", "Australia", -33.8688, 151.2093, 5312000),
     ("Melbourne", "AU-VIC", "Victoria", "Australia", -37.8136, 144.9631, 5078000),
     ("Brisbane", "AU-QLD", "Queensland", "Australia", -27.4698, 153.0251, 2560720),

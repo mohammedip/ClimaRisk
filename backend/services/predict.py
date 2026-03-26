@@ -152,7 +152,7 @@ def flood_probability(
 
 
 def _flood_heuristic(precip_1d, precip_3d, twi, jrc_perm_water) -> float:
-    """Simple fallback if model file is missing or corrupt."""
+
     score = 0.05
     if precip_1d      and precip_1d      > 50:  score += 0.30
     if precip_3d      and precip_3d      > 100: score += 0.25

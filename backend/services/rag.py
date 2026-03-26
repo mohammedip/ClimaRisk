@@ -68,19 +68,18 @@ def add_query_prefix(question: str) -> str:
     return f"query: {question}"
 
 def format_docs(docs) -> str:
-    # This provides the context block the LLM sees
+
     return "\n\n---\n\n".join([
         f"[Source: {clean_source_name(d.metadata.get('source', 'unknown'))}]\n"
         f"{d.page_content.replace('passage: ', '', 1)}"
         for d in docs
     ])
 
-# --- Core Logic ---
 
 def retrieve(query: str, top_k: int = TOP_K) -> List[dict]:
     if _vectorstore is None: return []
     prefixed = add_query_prefix(query)
-    # Use relevance scores to filter out garbage matches
+
     results = _vectorstore.similarity_search_with_relevance_scores(prefixed, k=top_k)
     
     return [
@@ -101,14 +100,12 @@ def build_chain(zone_context: str = ""):
     if _vectorstore is None:
         raise RuntimeError("Vectorstore not initialized.")
 
-    # Optimized Retriever with prefixing
     base_retriever = _vectorstore.as_retriever(
         search_type="mmr", 
         search_kwargs={"k": TOP_K, "fetch_k": 20, "lambda_mult": 0.5}
         )
     retriever = RunnableLambda(lambda q: base_retriever.invoke(add_query_prefix(translate_query_if_needed(q))))
 
-    # Ensure URL is clean and model is correct
     llm = ChatOllama(model=MODEL, base_url=OLLAMA_URL.rstrip("/"), temperature=0.0) 
 
     system = SYSTEM_PROMPT
@@ -137,7 +134,7 @@ async def stream_answer(question: str, zone_context: str = "") -> AsyncIterator[
 
 if __name__ == "__main__":
     async def _test():
-        # Corrected: sys.argv to get the actual string
+
         q = sys.argv if len(sys.argv) > 1 else "What is the flood evacuation protocol?"
         print(f"\n🔍 Testing RAG with: {q}\n")
         async for token in stream_answer(q):

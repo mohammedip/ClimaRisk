@@ -20,7 +20,7 @@ def convert_pdf(pdf_path: Path) -> Path:
 
 def main():
     MARKDOWN_DIR.mkdir(parents=True, exist_ok=True)
-    pdfs = sorted(DOCS_DIR.rglob("*.pdf"))  # rglob = recursive, finds PDFs in subfolders
+    pdfs = sorted(DOCS_DIR.rglob("*.pdf")) 
 
     if not pdfs:
         print(f"⚠️  No PDFs found in {DOCS_DIR}")
