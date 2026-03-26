@@ -29,7 +29,6 @@ def create_access_token(data: dict) -> str:
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
 
-# ── Auth dependency ───────────────────────────────────────────────────────────
 
 bearer_scheme = HTTPBearer()
 
