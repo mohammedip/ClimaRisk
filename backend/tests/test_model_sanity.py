@@ -1,18 +1,9 @@
-"""
-ML Model Sanity Tests
-========================
-Validates that flood and fire predictions make geographic sense.
-Runs in CI without a database — tests the model and prediction logic only.
-
-Run: python backend/tests/test_model_sanity.py
-"""
 import sys
 import os
 import math
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-# ── Fire model tests ───────────────────────────────────────────────────────────
 
 def test_fire_probability():
     from services.predict import fire_probability
