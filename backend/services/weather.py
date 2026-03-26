@@ -18,7 +18,7 @@ DAILY_VARS = [
     "et0_fao_evapotranspiration",
 ]
 
-# ── Cache: stores results for 30 min, rounds coords to ~1km grid ─────────────
+
 _CACHE_TTL = 1800
 _cache:    dict = {}
 _inflight: dict = {}
@@ -127,7 +127,7 @@ def _derive_ndvi_ndwi(
 
 
 async def _do_fetch(lat: float, lon: float) -> dict:
-    """Raw fetch + process. Only called on a true cache miss."""
+
     async with httpx.AsyncClient() as client:
         meteo_data, terrain = await asyncio.gather(
             _fetch_open_meteo(lat, lon, client),
@@ -184,16 +184,16 @@ async def _do_fetch(lat: float, lon: float) -> dict:
 async def fetch_weather(lat: float, lon: float) -> dict:
     key = _key(lat, lon)
 
-    # 1. Cache hit — return immediately, zero API calls
+
     entry = _cache.get(key)
     if entry and entry["expires_at"] > time.monotonic():
         return entry["data"]
 
-    # 2. Already fetching — wait for that result instead of making a new request
+
     if key in _inflight:
         return await _inflight[key]
 
-    # 3. First caller — fetch and let everyone else wait on the same Future
+
     future = asyncio.get_event_loop().create_future()
     _inflight[key] = future
     try:

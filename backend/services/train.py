@@ -8,7 +8,7 @@ FLOOD_CSV  = Path("/app/data/csvs/flood/flood_cleaned.csv")
 MODELS_DIR = Path("/app/data/models")
 MODELS_DIR.mkdir(parents=True, exist_ok=True)
 
-# FIX: jrc_perm_water added — strongest static predictor
+
 FEATURES = [
     "precip_1d", "precip_3d", "NDVI", "NDWI",
     "jrc_perm_water",
@@ -41,8 +41,7 @@ def train():
 
     print(f"📊 Dataset: {len(df):,} rows | Imbalance Ratio: {ratio:.1f}")
 
-    # FIX: subsample + colsample_bytree added to prevent overfitting
-    # FIX: min_child_weight=10 prevents splits on tiny flood clusters
+
     model = XGBClassifier(
         n_estimators=500,
         max_depth=6,
@@ -76,7 +75,7 @@ def train():
 
     joblib.dump(model, MODELS_DIR / "flood_model.pkl")
 
-    # FIX: importance sort by score (x[1]), not by tuple (x)
+
     importance_scores = model.feature_importances_.tolist()
     importance_map = dict(sorted(
         zip(FEATURES, importance_scores),
@@ -84,7 +83,7 @@ def train():
         reverse=True,
     ))
 
-    # FIX: auc stored at top level so predict.py can read it directly
+
     meta = {
         "features":  FEATURES,
         "version":   "1.1.0-engineered",
