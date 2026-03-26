@@ -321,3 +321,17 @@
 [2026-03-26T08:34:21.496+0000] {logging_mixin.py:188} INFO - [2026-03-26T08:34:21.496+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2026-03-26T08:34:21.519+0000] {logging_mixin.py:188} INFO - [2026-03-26T08:34:21.519+0000] {dag.py:3954} INFO - Setting next_dagrun for climarisk_predictions to 2026-03-26 05:00:00+00:00, run_after=2026-03-26 10:00:00+00:00
 [2026-03-26T08:34:21.545+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/climarisk_dag.py took 0.117 seconds
+[2026-03-26T08:34:52.493+0000] {processor.py:161} INFO - Started process (PID=2025) to work on /opt/airflow/dags/climarisk_dag.py
+[2026-03-26T08:34:52.495+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/climarisk_dag.py for tasks to queue
+[2026-03-26T08:34:52.497+0000] {logging_mixin.py:188} INFO - [2026-03-26T08:34:52.497+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/climarisk_dag.py
+[2026-03-26T08:34:52.522+0000] {processor.py:840} INFO - DAG(s) 'climarisk_predictions' retrieved from /opt/airflow/dags/climarisk_dag.py
+[2026-03-26T08:34:52.552+0000] {logging_mixin.py:188} INFO - [2026-03-26T08:34:52.552+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2026-03-26T08:34:52.580+0000] {logging_mixin.py:188} INFO - [2026-03-26T08:34:52.579+0000] {dag.py:3954} INFO - Setting next_dagrun for climarisk_predictions to 2026-03-26 05:00:00+00:00, run_after=2026-03-26 10:00:00+00:00
+[2026-03-26T08:34:52.602+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/climarisk_dag.py took 0.115 seconds
+[2026-03-26T08:35:23.436+0000] {processor.py:161} INFO - Started process (PID=2042) to work on /opt/airflow/dags/climarisk_dag.py
+[2026-03-26T08:35:23.437+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/climarisk_dag.py for tasks to queue
+[2026-03-26T08:35:23.439+0000] {logging_mixin.py:188} INFO - [2026-03-26T08:35:23.439+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/climarisk_dag.py
+[2026-03-26T08:35:23.461+0000] {processor.py:840} INFO - DAG(s) 'climarisk_predictions' retrieved from /opt/airflow/dags/climarisk_dag.py
+[2026-03-26T08:35:23.490+0000] {logging_mixin.py:188} INFO - [2026-03-26T08:35:23.490+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2026-03-26T08:35:23.514+0000] {logging_mixin.py:188} INFO - [2026-03-26T08:35:23.514+0000] {dag.py:3954} INFO - Setting next_dagrun for climarisk_predictions to 2026-03-26 05:00:00+00:00, run_after=2026-03-26 10:00:00+00:00
+[2026-03-26T08:35:23.537+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/climarisk_dag.py took 0.106 seconds

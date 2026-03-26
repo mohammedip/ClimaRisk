@@ -148,7 +148,6 @@ const CSS = `
   .popup-risk-CRITICAL { background: rgba(124,58,237,0.15); color: #7c3aed; }
 `;
 
-// Nav definition — "view" key maps to which panel to show
 const NAV = [
   { icon: "◉", label: "Live Map",     view: "map",         roles: ["PUBLIC","RESCUE","ADMIN"] },
   { icon: "⚡", label: "Predictions",  view: "predictions", roles: ["RESCUE","ADMIN"] },
@@ -212,7 +211,6 @@ export default function Dashboard() {
     if (riskCounts[p.overall_risk] !== undefined) riskCounts[p.overall_risk]++;
   });
 
-  // Render the right panel based on activeView
   function renderContent() {
     switch (activeView) {
       case "map":
@@ -285,7 +283,6 @@ export default function Dashboard() {
         );
 
       case "chat":
-        // ChatPanel is already a floating widget on the map — show it standalone here too
         return (
           <div className="content-area">
             <div className="panel-scroll" style={{ color: "#4a6280", fontFamily: "'DM Sans',sans-serif", fontSize: 13 }}>
