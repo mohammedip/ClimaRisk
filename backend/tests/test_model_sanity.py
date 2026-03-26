@@ -1,6 +1,5 @@
 import sys
 import os
-import math
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -31,18 +30,16 @@ def test_fire_probability():
     print("✅ fire_probability tests passed")
 
 
-
 def test_flood_heuristic():
     from services.predict import _flood_heuristic
 
-    p = _flood_heuristic(rainfall_mm=50, river_level_m=4, soil_moisture_pct=30)
+    p = _flood_heuristic(precip_1d=80, precip_3d=150, twi=9, jrc_perm_water=1)
     assert p >= 0.50, f"Heavy flood conditions should give HIGH risk, got {p:.2%}"
 
-    p = _flood_heuristic(rainfall_mm=2, river_level_m=0.3, soil_moisture_pct=5)
+    p = _flood_heuristic(precip_1d=2, precip_3d=5, twi=1, jrc_perm_water=0)
     assert p <= 0.15, f"Dry conditions should give LOW risk, got {p:.2%}"
 
     print("✅ flood heuristic tests passed")
-
 
 
 def test_elevation_gate():
@@ -50,21 +47,22 @@ def test_elevation_gate():
     raw_prob = 1.0
 
     def apply_gate(prob, elev):
-        if elev > 800:   return prob * 0.05
-        elif elev > 500: return prob * 0.15
-        elif elev > 300: return prob * 0.35
-        elif elev > 200: return prob * 0.60
+        if elev > 800:
+            return prob * 0.20
+        elif elev > 400:
+            return prob * 0.45
         return prob
 
-    assert apply_gate(raw_prob, 1028) < 0.10, "Mountain should have near-zero flood risk"
+    assert apply_gate(raw_prob, 1000) <= 0.20, \
+        f"Mountain should have near-zero flood risk, got {apply_gate(raw_prob, 1000)}"
 
-    assert apply_gate(raw_prob, 20) == raw_prob, "Low elevation should not be penalized"
+    assert apply_gate(raw_prob, 20) == raw_prob, \
+        "Low elevation should not be penalized"
 
-    assert apply_gate(raw_prob, 500) < apply_gate(raw_prob, 200), \
+    assert apply_gate(raw_prob, 800) < apply_gate(raw_prob, 100), \
         "Higher elevation should give lower risk"
 
     print("✅ elevation gate tests passed")
-
 
 
 def test_probability_bounds():
@@ -74,10 +72,10 @@ def test_probability_bounds():
         for rh in [5, 50, 95]:
             p = fire_probability(temperature_c=temp, humidity_pct=rh,
                                  wind_speed_kmh=20, rainfall_mm=0, fwi=None)
-            assert 0.0 <= p <= 1.0, f"Probability out of bounds: {p} for temp={temp}, rh={rh}"
+            assert 0.0 <= p <= 1.0, \
+                f"Probability out of bounds: {p} for temp={temp}, rh={rh}"
 
     print("✅ probability bounds tests passed")
-
 
 
 def test_risk_levels():

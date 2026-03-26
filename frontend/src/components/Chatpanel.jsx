@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import useAuthStore from "../store/authStore";
+import ReactMarkdown from "react-markdown";
 
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
@@ -81,6 +82,30 @@ const CSS = `
     border: 1px solid rgba(255,255,255,0.08);
     color: #cbd5e1; border-bottom-left-radius: 4px;
   }
+
+  .msg.ai .msg-bubble p          { margin: 0 0 8px 0; }
+  .msg.ai .msg-bubble p:last-child { margin-bottom: 0; }
+  .msg.ai .msg-bubble ul, 
+  .msg.ai .msg-bubble ol         { margin: 6px 0 8px 16px; padding: 0; }
+  .msg.ai .msg-bubble li         { margin-bottom: 4px; }
+  .msg.ai .msg-bubble strong     { color: #f1f5f9; font-weight: 600; }
+  .msg.ai .msg-bubble em         { color: #94a3b8; }
+  .msg.ai .msg-bubble code       { 
+    background: rgba(0,0,0,0.4); border-radius: 4px; 
+    padding: 2px 6px; font-size: 11px; color: #f59e0b; 
+    font-family: monospace;
+  }
+  .msg.ai .msg-bubble pre        { 
+    background: rgba(0,0,0,0.4); border-radius: 8px; 
+    padding: 10px 12px; overflow-x: auto; margin: 8px 0;
+  }
+  .msg.ai .msg-bubble pre code   { background: none; padding: 0; color: #94a3b8; }
+  .msg.ai .msg-bubble h3         { font-size: 13px; color: #f1f5f9; margin: 8px 0 4px; }
+  .msg.ai .msg-bubble blockquote { 
+    border-left: 2px solid rgba(245,158,11,0.4); 
+    margin: 6px 0; padding: 4px 10px; color: #64748b; 
+  }
+  .msg.ai .msg-bubble hr         { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 8px 0; }
   .msg-time { font-size: 10px; color: #2a3a4a; }
 
   .typing { display: flex; gap: 4px; align-items: center; padding: 4px 0; }
@@ -280,9 +305,14 @@ export default function ChatPanel({ zoneContext = "" }) {
               {messages.map((msg, i) => (
                 <div key={i} className={`msg ${msg.role}`}>
                   <div className="msg-bubble">
-                    {msg.content || (msg.role === "ai" && loading && i === messages.length - 1
-                      ? <div className="typing"><span/><span/><span/></div>
-                      : ""
+                    {msg.role === "ai" ? (
+                      msg.content
+                        ? <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        : loading && i === messages.length - 1
+                          ? <div className="typing"><span/><span/><span/></div>
+                          : null
+                    ) : (
+                      msg.content
                     )}
                   </div>
                   <div className="msg-time">{formatTime(msg.time)}</div>

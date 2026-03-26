@@ -14,7 +14,6 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,7 +32,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: lint
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -63,13 +61,13 @@ jobs:
       - name: Validate ML model sanity
         env:
           PYTHONPATH: ".:backend"
+
         run: python backend/tests/test_model_sanity.py
 
   build-and-push:
     runs-on: ubuntu-latest
     needs: test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
