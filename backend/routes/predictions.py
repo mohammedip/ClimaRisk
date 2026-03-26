@@ -19,7 +19,6 @@ from services.weather import fetch_weather
 router = APIRouter()
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
 
 async def get_zone_or_404(zone_id: int, db: AsyncSession) -> Zone:
     result = await db.execute(

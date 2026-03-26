@@ -20,14 +20,13 @@ async def get_zone_or_404(zone_id: int, db: AsyncSession) -> Zone:
     return zone
 
 
-# ── Get all active alerts ─────────────────────────────────────────────────────
 
 @router.get("/", response_model=list[AlertResponse])
 async def get_alerts(
     db: AsyncSession = Depends(get_db),
     _=  Depends(get_current_user),
 ):
-    """All active alerts — any logged-in user."""
+
     result = await db.execute(
         select(Alert)
         .where(Alert.is_active == True)
@@ -36,7 +35,6 @@ async def get_alerts(
     return result.scalars().all()
 
 
-# ── Get alerts for a specific zone ───────────────────────────────────────────
 
 @router.get("/zone/{zone_id}", response_model=list[AlertResponse])
 async def get_zone_alerts(
@@ -53,7 +51,6 @@ async def get_zone_alerts(
     return result.scalars().all()
 
 
-# ── Create alert (ADMIN or auto-triggered by predictions) ────────────────────
 
 @router.post("/", response_model=AlertResponse, status_code=201)
 async def create_alert(
@@ -70,7 +67,6 @@ async def create_alert(
     return alert
 
 
-# ── Resolve alert ─────────────────────────────────────────────────────────────
 
 @router.patch("/{alert_id}/resolve", response_model=AlertResponse)
 async def resolve_alert(
@@ -93,7 +89,6 @@ async def resolve_alert(
     return alert
 
 
-# ── Delete alert (ADMIN only) ─────────────────────────────────────────────────
 
 @router.delete("/{alert_id}", status_code=204)
 async def delete_alert(

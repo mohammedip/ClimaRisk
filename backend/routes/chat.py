@@ -22,7 +22,7 @@ async def chat(
     body: ChatRequest,
     _=   Depends(require_role("RESCUE", "ADMIN")),
 ):
-    """Stream a RAG-powered answer — RESCUE and ADMIN only."""
+
     if not body.question.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty")
 
@@ -35,7 +35,7 @@ async def chat(
 
 @router.get("/sources")
 async def get_sources(question: str, _=Depends(get_current_user)):
-    """Return the retrieved chunks for a question — useful for debugging."""
+
     chunks = retrieve(question)
     return chunks
 
@@ -45,7 +45,7 @@ async def upload_pdf(
     file: UploadFile = File(...),
     _=    Depends(require_role("ADMIN")),
 ):
-    """Upload a PDF to /app/data/docs/ — then run the ingest scripts."""
+
     if not file.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files accepted")
 
