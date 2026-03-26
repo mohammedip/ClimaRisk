@@ -162,7 +162,6 @@ export default function ChatPanel({ zoneContext = "" }) {
 
   const token = useAuthStore((s) => s.token);
 
-  // Persist messages on every change
   useEffect(() => {
     localStorage.setItem("chat_messages", JSON.stringify(messages));
   }, [messages]);

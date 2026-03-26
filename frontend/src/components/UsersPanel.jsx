@@ -129,13 +129,11 @@ export default function UsersPanel() {
     }
   }
 
-  // Stats
   const total   = users.length;
   const admins  = users.filter(u => u.role === "ADMIN").length;
   const rescue  = users.filter(u => u.role === "RESCUE").length;
   const inactive= users.filter(u => !u.is_active).length;
 
-  // Filter + search
   const displayed = users
     .filter(u => filter === "ALL" || u.role === filter)
     .filter(u => {

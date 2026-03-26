@@ -154,7 +154,6 @@ export default function AlertPanel({ autoRefresh = true, refreshInterval = 15000
   const [filter,   setFilter]   = useState("ALL");
   const [showResolved, setShowResolved] = useState(false);
   const [lastSync, setLastSync] = useState(null);
-  // Track locally dismissed (hidden, not resolved via API)
   const [dismissed, setDismissed] = useState(new Set());
 
   const user   = useAuthStore((s) => s.user);
@@ -180,30 +179,27 @@ export default function AlertPanel({ autoRefresh = true, refreshInterval = 15000
     return () => clearInterval(id);
   }, [autoRefresh, refreshInterval, fetchAlerts]);
 
-  // PATCH /alerts/{id}/resolve
   const resolveAlert = useCallback(async (id) => {
-    // Optimistic update
+
     setAlerts((prev) => prev.map((a) => a.id === id ? { ...a, is_active: false, resolved_at: new Date().toISOString() } : a));
     try {
       await api.patch(`/alerts/${id}/resolve`);
     } catch (e) {
-      // Roll back on failure
+
       setAlerts((prev) => prev.map((a) => a.id === id ? { ...a, is_active: true, resolved_at: null } : a));
     }
   }, []);
 
-  // Local dismiss (hide from UI without API call)
+
   const dismissAlert = useCallback((id) => {
     setDismissed((prev) => new Set([...prev, id]));
   }, []);
 
-  // Stats
   const active   = alerts.filter((a) => a.is_active && !dismissed.has(a.id));
   const critical = active.filter((a) => a.risk_level === "CRITICAL");
   const high     = active.filter((a) => a.risk_level === "HIGH");
   const resolved = alerts.filter((a) => !a.is_active);
 
-  // Filtered + sorted list
   const displayed = alerts
     .filter((a) => !dismissed.has(a.id))
     .filter((a) => showResolved ? true : a.is_active)
@@ -214,7 +210,7 @@ export default function AlertPanel({ autoRefresh = true, refreshInterval = 15000
       return a.risk_level === filter;
     })
     .sort((a, b) => {
-      // Active first, then by severity desc, then by date desc
+
       if (a.is_active !== b.is_active) return a.is_active ? -1 : 1;
       const rd = (RISK_CONFIG[b.risk_level]?.rank || 0) - (RISK_CONFIG[a.risk_level]?.rank || 0);
       if (rd !== 0) return rd;

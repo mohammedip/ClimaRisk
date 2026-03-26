@@ -97,14 +97,12 @@ function RiskCard({ type, icon, result, loading, error, onRun, zones }) {
 
   const [zoneId, setZoneId] = useState("");
 
-  // Flood simulation inputs — only the 4 most impactful ones
-  // The rest are derived/defaulted by the backend the same way weather.py does
-  const [precip1d,   setPrecip1d]   = useState("25");    // mm last 24h
-  const [precip3d,   setPrecip3d]   = useState("60");    // mm last 72h
-  const [elevation,  setElevation]  = useState("50");    // metres
-  const [twi,        setTwi]        = useState("4.0");   // topographic wetness
+  const [precip1d,   setPrecip1d]   = useState("25");  
+  const [precip3d,   setPrecip3d]   = useState("60");    
+  const [elevation,  setElevation]  = useState("50");   
+  const [twi,        setTwi]        = useState("4.0");   
 
-  // Fire simulation inputs
+
   const [temp,     setTemp]     = useState("35");
   const [humidity, setHumidity] = useState("20");
   const [wind,     setWind]     = useState("40");
@@ -123,7 +121,7 @@ function RiskCard({ type, icon, result, loading, error, onRun, zones }) {
 
     if (isFlood) {
       const elev = +elevation;
-      // Derive slope + upstream_area from elevation — same logic as weather.py
+
       let slope;
       if      (elev < 10)   slope = 1.0;
       else if (elev < 50)   slope = 2.5;
@@ -136,15 +134,14 @@ function RiskCard({ type, icon, result, loading, error, onRun, zones }) {
 
       onRun({
         zone_id:        +zoneId,
-        // Primary inputs — user-controlled
+    
         precip_1d:      +precip1d,
         precip_3d:      +precip3d,
         elevation:      elev,
         TWI:            +twi,
-        // Derived from elevation — consistent with weather.py
+
         slope:          slope,
         upstream_area:  upstream_area,
-        // Neutral defaults — don't push probability up or down artificially
         NDVI:           0.5,
         NDWI:           -0.2,
         jrc_perm_water: 0,
