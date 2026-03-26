@@ -2,7 +2,6 @@ from pydantic import BaseModel, field_validator
 from datetime import datetime
 
 
-# ── Shared ────────────────────────────────────────────────────────────────────
 
 def probability_to_risk_level(p: float) -> str:
 
@@ -12,14 +11,13 @@ def probability_to_risk_level(p: float) -> str:
     return "LOW"
 
 
-# ── Flood ─────────────────────────────────────────────────────────────────────
 
 class FloodPredictionRequest(BaseModel):
     zone_id:           int
     rainfall_mm:       float | None = None
     river_level_m:     float | None = None
-    soil_moisture_pct: float | None = None   # percentage 0-100
-    elevation_m:       float | None = None   # auto-fetched from zone if None
+    soil_moisture_pct: float | None = None   
+    elevation_m:       float | None = None  
 
     @field_validator("zone_id")
     @classmethod
@@ -55,8 +53,7 @@ class FloodSimulationRequest(BaseModel):
     jrc_perm_water: float = 0.0
     landcover:      float = 40.0
 
-    
-# ── Fire ──────────────────────────────────────────────────────────────────────
+
 
 class FirePredictionRequest(BaseModel):
     zone_id:        int

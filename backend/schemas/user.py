@@ -2,7 +2,6 @@ from pydantic import BaseModel, EmailStr, field_validator
 from datetime import datetime
 
 
-# ── Requests (what the client sends) ─────────────────────────────────────────
 
 class RegisterRequest(BaseModel):
     username:  str
@@ -40,7 +39,6 @@ class LoginRequest(BaseModel):
     password: str
 
 
-# ── Responses (what we send back) ────────────────────────────────────────────
 
 class UserResponse(BaseModel):
     id:         int
