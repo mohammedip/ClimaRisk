@@ -18,12 +18,11 @@ logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(title="ClimaRisk API", version="0.1.0")
 
-# ── Prometheus — auto-instrument all HTTP routes ──────────────────────────────
 Instrumentator().instrument(app).expose(app)
 
 
 async def collect_system_metrics():
-    """Updates CPU and RAM gauges every 30 seconds using psutil."""
+
     while True:
         try:
             cpu_usage_gauge.set(psutil.cpu_percent(interval=1))
